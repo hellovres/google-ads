@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../lib/site';
+---
+
+<BaseLayout title="Affiliate disclosure" description="How affiliate links support Chongqing Field Guide and how editorial recommendations are handled." noindex>
+  <article class="content-page">
+    <div class="wrap">
+      <span class="eyebrow" style="color: var(--terra);">Disclosure</span>
+      <h1 class="display">Affiliate disclosure</h1>
+      <p class="intro">Some links on this site can earn a commission when a reader books a hotel, tour, ticket or connectivity product.</p>
+
+      <div class="prose">
+        <h2>Partners</h2>
+        <p>Affiliate relationships may include Trip.com and Agoda for accommodation, Klook for tours and attraction tickets, and eSIM or connectivity providers. The partner mix can change as the site develops.</p>
+
+        <h2>What a commission changes</h2>
+        <p>Commission supports the research, illustration and hosting costs of the guide. It does not add a surcharge to the reader's price. Recommendations are based on route fit, location, cancellation terms and the needs of an English-speaking visitor.</p>
+
+        <h2>How links are marked</h2>
+        <p>Articles with booking links carry a disclosure near the end of the main text. Outbound links may use tracking parameters supplied by the partner. The destination site's price and terms are the authoritative version at checkout.</p>
+
+        <h2>Editorial independence</h2>
+        <p>Partners receive no promise of coverage, ranking or a positive review. A property or service can be recommended because it solves a route problem even when no affiliate programme is available.</p>
+
+        <h2>Questions</h2>
+        <p>Send questions about a specific link to <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

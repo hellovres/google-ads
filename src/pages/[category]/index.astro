@@ -1,0 +1,92 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+import PhraseList from '../../components/PhraseList.astro';
+import { getArticlesByCategory, articlePath } from '../../lib/articles';
+import { categories, categoryOrder, type CategorySlug } from '../../lib/categories';
+import { site } from '../../lib/site';
+
+export function getStaticPaths() {
+  return categoryOrder.map((category) => ({ params: { category } }));
+}
+
+const category = categories[Astro.params.category as CategorySlug];
+const articles = await getArticlesByCategory(category.slug);
+const canonical = new URL(`/${category.slug}/`, site.url).toString();
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'CollectionPage',
+  name: category.name,
+  description: category.description,
+  url: canonical,
+  isPartOf: { '@type': 'WebSite', name: site.name, url: site.url },
+  mainEntity: {
+    '@type': 'ItemList',
+    itemListElement: articles.map((article, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: article.data.title,
+      url: new URL(articlePath(article), site.url).toString(),
+    })),
+  },
+};
+---
+
+<BaseLayout title={category.name} description={category.description} image={category.art} jsonLd={jsonLd}>
+  <header class="page-hero">
+    <div class="wrap page-hero-grid">
+      <div>
+        <span class="eyebrow" style="color: var(--terra);">{category.eyebrow}</span>
+        <h1 class="display">{category.name}</h1>
+        <p class="lede">{category.intro}</p>
+        <div class="page-hero-meta">
+          <span>{articles.length} guides</span>
+          <span>Updated November 2026</span>
+          <span>English</span>
+        </div>
+      </div>
+      <img class="page-hero-art" src={category.art} alt="" width="440" height="340" aria-hidden="true" />
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="article-list">
+        {articles.map((article, index) => (
+          <a class="list-row" href={articlePath(article)}>
+            <span class="list-num">{String(index + 1).padStart(2, '0')}</span>
+            <span class="list-title">{article.data.title}</span>
+            <span class="list-desc">{article.data.description}</span>
+            <span class="list-meta">{article.data.readingTime} min read</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-tight section-rule">
+    <div class="wrap phrase-panel">
+      <div class="phrase-intro">
+        <span class="eyebrow" style="color: var(--terra);">Useful here</span>
+        <h2 style="margin-top: 16px; font-size: clamp(2.4rem, 4vw, 3.6rem);">Five phrases for this section.</h2>
+        <p>{category.description}</p>
+      </div>
+      <PhraseList phrases={category.phrases} />
+    </div>
+  </section>
+
+  <section class="section section-rule">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" style="color: var(--terra);">Go deeper</span>
+          <h2 style="margin-top: 16px;">Selected guides.</h2>
+        </div>
+      </div>
+      <div class="card-grid">
+        {articles.slice(0, 3).map((article) => <ArticleCard article={article} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

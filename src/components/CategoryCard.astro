@@ -1,0 +1,16 @@
+---
+import type { Category } from '../lib/categories';
+
+interface Props {
+  category: Category;
+  index: number;
+}
+const { category, index } = Astro.props;
+---
+
+<a class="category-card" href={`/${category.slug}/`}>
+  <span class="cat-index">{String(index + 1).padStart(2, '0')} / {category.eyebrow}</span>
+  <h3>{category.name}</h3>
+  <p>{category.description}</p>
+  <img src={category.art} alt="" width="360" height="280" loading="lazy" aria-hidden="true" />
+</a>

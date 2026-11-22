@@ -1,0 +1,37 @@
+---
+import type { ArticleEntry } from '../lib/articles';
+import { articlePath } from '../lib/articles';
+import { formatDate } from '../lib/site';
+import { getCategoryFor } from '../lib/articles';
+
+interface Props {
+  article: ArticleEntry;
+  eager?: boolean;
+}
+
+const { article, eager = false } = Astro.props;
+const category = getCategoryFor(article);
+const href = articlePath(article);
+---
+
+<a class="article-card" href={href}>
+  <div class="card-media">
+    <img
+      src={article.data.heroImage}
+      alt={article.data.heroAlt}
+      width="800"
+      height="500"
+      loading={eager ? 'eager' : 'lazy'}
+      decoding="async"
+    />
+    <span class="card-kicker">{category.shortName}</span>
+  </div>
+  <div class="card-body">
+    <h3 class="card-title">{article.data.title}</h3>
+    <p class="card-desc">{article.data.description}</p>
+    <div class="card-foot">
+      <span>{formatDate(article.data.updatedDate ?? article.data.pubDate)} · {article.data.readingTime} min</span>
+      <span class="arrow" aria-hidden="true">↗</span>
+    </div>
+  </div>
+</a>

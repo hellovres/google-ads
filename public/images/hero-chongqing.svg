@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 760" role="img" aria-label="Illustrated Chongqing skyline with monorail, cable car and river">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#fbf7ee"/>
+    <stop offset="0.55" stop-color="#f0e6d2"/>
+    <stop offset="1" stop-color="#e2d1b0"/>
+  </linearGradient>
+  <linearGradient id="river" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="#276354"/>
+    <stop offset="0.55" stop-color="#315b78"/>
+    <stop offset="1" stop-color="#15231d"/>
+  </linearGradient>
+  <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="#d2a64c"/>
+    <stop offset="1" stop-color="#cf4d2f"/>
+  </linearGradient>
+  <pattern id="windows" width="18" height="22" patternUnits="userSpaceOnUse">
+    <rect width="18" height="22" fill="#15231d"/>
+    <rect x="4" y="5" width="5" height="6" fill="#d2a64c" opacity="0.9"/>
+    <rect x="12" y="13" width="3" height="4" fill="#fbf7ee" opacity="0.7"/>
+  </pattern>
+  <filter id="grain">
+    <feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope="0.08"/></feComponentTransfer>
+    <feBlend in="SourceGraphic" mode="multiply"/>
+  </filter>
+</defs>
+  <g opacity="0.95">
+    <circle cx="644" cy="226" r="168" fill="url(#sun)" opacity="0.95"/>
+    <circle cx="644" cy="226" r="205" fill="none" stroke="#d2a64c" stroke-width="1" opacity="0.35"/>
+    <circle cx="644" cy="226" r="236" fill="none" stroke="#d2a64c" stroke-width="1" opacity="0.18"/>
+  </g>
+  <path d="M23 442C95 384 156 390 220 410c66 20 107-8 174-45 43-24 86-30 134-8 62 29 111 27 171-8 54-32 108-27 180 15v371H23Z" fill="#276354" opacity="0.28"/>
+  <path d="M0 490c71-43 133-50 193-27 64 24 105 9 165-30 58-38 104-43 162-16 58 27 118 24 181-9 66-35 137-30 199 17v335H0Z" fill="#276354" opacity="0.58"/>
+  <g fill="#15231d">
+    <rect x="91" y="258" width="91" height="241" rx="3"/>
+    <rect x="198" y="302" width="65" height="197" rx="3" fill="#263b32"/>
+    <rect x="281" y="230" width="118" height="270" rx="3"/>
+    <rect x="421" y="332" width="78" height="168" rx="3" fill="#263b32"/>
+    <rect x="737" y="312" width="79" height="188" rx="3"/>
+  </g>
+  <g opacity="0.92">
+    <rect x="98" y="270" width="77" height="216" fill="url(#windows)"/>
+    <rect x="290" y="243" width="100" height="244" fill="url(#windows)"/>
+    <rect x="744" y="324" width="65" height="163" fill="url(#windows)" opacity="0.75"/>
+  </g>
+  <g fill="none" stroke="#fbf7ee" stroke-width="1.5" opacity="0.55">
+    <path d="M91 305h91M91 354h91M91 402h91M198 338h65M198 384h65M281 277h118M281 331h118M281 385h118M421 369h78M421 421h78"/>
+  </g>
+  <path d="M520 224c23-12 42-10 62 1l-7 185h-48Z" fill="#cf4d2f"/>
+  <path d="M531 240h39v158h-39Z" fill="#15231d" opacity="0.9"/>
+  <path d="M550 120v108" stroke="#fbf7ee" stroke-width="2"/>
+  <circle cx="550" cy="113" r="6" fill="#d2a64c"/>
+  <path d="M635 132c-6 58-40 91-90 104" fill="none" stroke="#fbf7ee" stroke-width="2" opacity="0.75"/>
+  <g transform="translate(512 211)">
+    <rect x="0" y="0" width="42" height="27" rx="5" fill="#fbf7ee"/>
+    <path d="M12 27v10M30 27v10" stroke="#15231d" stroke-width="3"/>
+    <rect x="6" y="6" width="30" height="11" rx="2" fill="#d2a64c"/>
+  </g>
+  <g>
+    <path d="M688 391c-15 47-42 70-85 75" fill="none" stroke="#fbf7ee" stroke-width="1.5" opacity="0.55"/>
+    <circle cx="688" cy="386" r="2.5" fill="#d2a64c"/>
+    <circle cx="603" cy="466" r="2.5" fill="#d2a64c"/>
+    <g transform="translate(660 426)">
+      <rect width="50" height="31" rx="4" fill="#fbf7ee"/>
+      <path d="M9 31v12M41 31v12" stroke="#15231d" stroke-width="3"/>
+      <rect x="7" y="7" width="36" height="13" rx="2" fill="#cf4d2f"/>
+    </g>
+  </g>
+  <path d="M0 513c115-20 203-8 293 26 105 40 182 42 284 7 88-30 187-31 323 7v207H0Z" fill="url(#river)"/>
+  <g fill="none" stroke="#fbf7ee" opacity="0.26">
+    <path d="M24 570c109-18 182-6 263 22 101 36 173 36 267 8 89-27 177-23 302 6" stroke-width="1.5"/>
+    <path d="M-7 623c121-22 206-8 292 20 104 34 187 31 281 4 91-26 183-19 307 10" stroke-width="1"/>
+    <path d="M35 680c98-18 174-7 258 18 98 29 177 28 272 2 89-24 178-19 291 7" stroke-width="1"/>
+  </g>
+  <path d="M0 529h900" stroke="#fbf7ee" stroke-width="1" opacity="0.35"/>
+  <g transform="translate(46 540)" fill="#fbf7ee">
+    <rect width="164" height="5" rx="2.5" opacity="0.8"/>
+    <rect x="37" y="5" width="52" height="78" rx="2" opacity="0.55"/>
+    <rect x="101" y="5" width="31" height="56" rx="2" opacity="0.45"/>
+  </g>
+  <g transform="translate(625 560)">
+    <path d="M0 45c31-24 86-25 120 0-39 12-82 12-120 0Z" fill="#fbf7ee" opacity="0.85"/>
+    <path d="M29 45V24h19v21M56 45V31h25v14" fill="none" stroke="#15231d" stroke-width="2"/>
+  </g>
+  <g transform="translate(712 78)" fill="#d2a64c" opacity="0.9">
+    <rect x="0" y="0" width="7" height="7"/>
+    <rect x="11" y="0" width="7" height="7"/>
+    <rect x="0" y="11" width="7" height="7"/>
+    <rect x="22" y="0" width="7" height="7"/>
+    <rect x="33" y="0" width="7" height="7"/>
+    <rect x="22" y="11" width="7" height="7"/>
+    <rect x="33" y="11" width="7" height="7"/>
+    <rect x="0" y="22" width="7" height="7"/>
+    <rect x="11" y="22" width="7" height="7"/>
+    <rect x="0" y="33" width="7" height="7"/>
+    <rect x="22" y="33" width="7" height="7"/>
+    <rect x="33" y="33" width="7" height="7"/>
+  </g>
+  <g transform="translate(750 160)" fill="#fbf7ee" font-family="Georgia,serif" font-size="22" opacity="0.78" writing-mode="tb">
+    <text x="0" y="0">重</text><text x="0" y="34">庆</text>
+  </g>
+  <rect x="18" y="18" width="864" height="724" rx="2" fill="none" stroke="#fbf7ee" stroke-width="1" opacity="0.2"/>
+</svg>

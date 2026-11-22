@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-label="WeChat mini program ticket on a phone with a QR code">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf7ee"/><stop offset="1" stop-color="#e7dac1"/></linearGradient>
+  <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d2a64c"/><stop offset="1" stop-color="#cf4d2f"/></linearGradient>
+  <linearGradient id="river" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#276354"/><stop offset="1" stop-color="#315b78"/></linearGradient>
+  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.07"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+</defs>
+  <rect width="800" height="560" fill="url(#sky)"/>
+  <g transform="translate(262 51)">
+    <rect width="276" height="462" rx="38" fill="#15231d"/>
+    <rect x="11" y="11" width="254" height="440" rx="29" fill="#fbf7ee"/>
+    <text x="38" y="67" fill="#67736c" font-family="DM Sans,sans-serif" font-size="9" letter-spacing="2">MINI PROGRAM</text>
+    <text x="38" y="96" fill="#15231d" font-family="Georgia,serif" font-size="21">River cableway</text>
+    <rect x="36" y="118" width="204" height="83" rx="10" fill="#276354"/>
+    <text x="50" y="143" fill="#d2a64c" font-family="DM Sans,sans-serif" font-size="8" letter-spacing="1.5">TICKET</text>
+    <text x="50" y="169" fill="#fbf7ee" font-family="Georgia,serif" font-size="17">2 adults</text>
+    <text x="50" y="188" fill="#b9c9c1" font-family="DM Sans,sans-serif" font-size="8">14:30–16:00 slot</text>
+    <rect x="36" y="220" width="204" height="150" rx="8" fill="#f4efe4"/>
+    <g fill="#15231d">
+      <rect x="77" y="243" width="55" height="55"/><rect x="193" y="243" width="20" height="20"/><rect x="193" y="274" width="20" height="20"/><rect x="203" y="342" width="14" height="14"/>
+      <rect x="89" y="255" width="31" height="31" fill="#f4efe4"/><rect x="96" y="262" width="17" height="17"/>
+    </g>
+    <g fill="#15231d">
+      <rect x="146" y="243" width="9" height="9"/><rect x="164" y="256" width="9" height="9"/><rect x="146" y="274" width="9" height="9"/><rect x="166" y="283" width="9" height="9"/>
+      <rect x="77" y="314" width="9" height="9"/><rect x="96" y="326" width="9" height="9"/><rect x="116" y="314" width="9" height="9"/><rect x="137" y="329" width="9" height="9"/>
+      <rect x="77" y="343" width="9" height="9"/><rect x="105" y="345" width="9" height="9"/><rect x="137" y="345" width="9" height="9"/>
+    </g>
+    <text x="138" y="392" text-anchor="middle" fill="#67736c" font-family="DM Sans,sans-serif" font-size="8">Show at the gate</text>
+    <rect x="36" y="408" width="204" height="26" rx="13" fill="#cf4d2f"/>
+  </g>
+  <g transform="translate(84 194) rotate(-8)">
+    <rect width="156" height="102" rx="8" fill="#fbf7ee" stroke="#15231d" stroke-width="1.5"/>
+    <path d="M13 28h130M13 43h85" stroke="#15231d" stroke-width="2" opacity="0.35"/>
+    <rect x="13" y="61" width="52" height="24" rx="3" fill="#d2a64c"/>
+    <circle cx="126" cy="73" r="14" fill="none" stroke="#cf4d2f" stroke-width="2"/>
+    <text x="13" y="98" fill="#67736c" font-family="DM Sans,sans-serif" font-size="7" letter-spacing="1">BOOK AHEAD</text>
+  </g>
+  <g transform="translate(569 352) rotate(7)">
+    <rect width="139" height="93" rx="8" fill="#276354"/>
+    <text x="15" y="28" fill="#d2a64c" font-family="DM Sans,sans-serif" font-size="7" letter-spacing="1.5">TIMED ENTRY</text>
+    <text x="15" y="54" fill="#fbf7ee" font-family="Georgia,serif" font-size="19">15:30</text>
+    <path d="M15 72h104" stroke="#fbf7ee" stroke-width="1" opacity="0.35"/>
+  </g>
+  <text x="52" y="518" fill="#15231d" font-family="Georgia,serif" font-size="21" font-style="italic">book the slot, skip the ticket line</text>
+  <g filter="url(#grain)" opacity="0.35"><rect width="800" height="560" fill="#fbf7ee"/></g>
+</svg>

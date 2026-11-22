@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../lib/site';
+---
+
+<BaseLayout title="Privacy policy" description="How Chongqing Field Guide handles analytics, cookies, affiliate links and contact information." noindex>
+  <article class="content-page">
+    <div class="wrap">
+      <span class="eyebrow" style="color: var(--terra);">Legal</span>
+      <h1 class="display">Privacy policy</h1>
+      <p class="intro">Effective 22 November 2026. This policy explains the information the site receives and how it is used.</p>
+
+      <div class="prose">
+        <h2>Information collected</h2>
+        <p>The site is a static publication. Reading an article does not require an account. If analytics is enabled, Google Analytics 4 may receive page views, approximate location, device type, browser, referral source and interaction events. IP addresses are anonymised where the analytics configuration supports it.</p>
+
+        <h2>Cookies and similar technologies</h2>
+        <p>Analytics and advertising partners may set cookies or read device identifiers. Google Analytics uses cookies to distinguish sessions and measure site use. Google AdSense, when enabled, may use cookies to select and measure advertising. Browser settings and consent tools can limit these technologies.</p>
+
+        <h2>Contact messages</h2>
+        <p>If you email the site, the message and address are used to answer the enquiry, verify a correction or manage a partnership request. Messages are retained for as long as needed to handle the matter and maintain an editorial record.</p>
+
+        <h2>Affiliate links</h2>
+        <p>Some outbound links are affiliate links. The destination service may set its own cookies after you click. Those services handle data under their own privacy policies. The <a href="/affiliate-disclosure/">affiliate disclosure</a> lists the types of partners used.</p>
+
+        <h2>Third-party services</h2>
+        <p>The site may use Google Analytics, Google AdSense, Cloudflare hosting and affiliate booking platforms. Each service processes data under its own terms and privacy policy. Links to those policies are available from the relevant service.</p>
+
+        <h2>Your choices</h2>
+        <p>You can block cookies in your browser, use a content blocker, or avoid clicking affiliate links. Requests to access or delete contact-message data can be sent to <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+
+        <h2>Children</h2>
+        <p>The site is intended for a general travel audience and is not directed to children under 13.</p>
+
+        <h2>Changes</h2>
+        <p>This policy is updated when the site adds a service that changes how data is handled. The effective date at the top of the page records the latest revision.</p>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Page not found" description="The page you requested could not be found." noindex>
+  <section class="section">
+    <div class="wrap">
+      <span class="eyebrow" style="color: var(--terra);">404 · Wrong turn</span>
+      <h1 class="display" style="font-size: clamp(3.5rem, 9vw, 7rem); max-width: 900px; margin: 22px 0 24px;">This staircase leads nowhere.</h1>
+      <p style="max-width: 600px; color: var(--muted); font-size: 1.08rem;">Chongqing has plenty of those. Try the guide index or start again from the homepage.</p>
+      <div class="hero-actions" style="margin-top: 32px;">
+        <a class="btn" href="/">Back to the homepage</a>
+        <a class="btn is-light" href="/guides/">Browse first-time guides</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

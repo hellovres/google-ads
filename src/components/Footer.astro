@@ -1,0 +1,50 @@
+---
+import { site } from '../lib/site';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/" aria-label={`${site.name} home`}>
+          <span class="brand-mark" aria-hidden="true">山</span>
+          <span class="brand-copy">
+            <strong>Chongqing</strong>
+            <span>Field Guide</span>
+          </span>
+        </a>
+        <p>Routes, costs, crowd timing, photo spots and the Mandarin you need at each stop.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Explore</h3>
+        <a href="/guides/">First-time guides</a>
+        <a href="/attractions/">Attractions</a>
+        <a href="/food/">Food</a>
+        <a href="/itineraries/">Itineraries</a>
+        <a href="/practical/">Practical</a>
+      </div>
+
+      <div class="footer-col">
+        <h3>Site</h3>
+        <a href="/about/">About</a>
+        <a href="/search/">Search</a>
+        <a href="/rss.xml">RSS feed</a>
+        <a href="/contact/">Contact</a>
+      </div>
+
+      <div class="footer-col">
+        <h3>Fine print</h3>
+        <a href="/privacy/">Privacy policy</a>
+        <a href="/terms/">Terms</a>
+        <a href="/affiliate-disclosure/">Affiliate disclosure</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {year} {site.name}. Independent travel publishing from Chongqing.</span>
+      <span>Coordinates 29.5630° N, 106.5516° E</span>
+    </div>
+  </div>
+</footer>

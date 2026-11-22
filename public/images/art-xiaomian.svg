@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-label="Bowl of Chongqing xiaomian noodles with chopsticks">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf7ee"/><stop offset="1" stop-color="#e7dac1"/></linearGradient>
+  <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d2a64c"/><stop offset="1" stop-color="#cf4d2f"/></linearGradient>
+  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.07"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+</defs>
+  <rect width="800" height="560" fill="url(#sky)"/>
+  <path d="M0 407c118-35 217-20 315 12 102 34 208 28 300-12 68-29 126-26 185-4v157H0Z" fill="#cf4d2f" opacity="0.1"/>
+  <ellipse cx="408" cy="423" rx="244" ry="41" fill="#15231d" opacity="0.16"/>
+  <g transform="translate(192 194)">
+    <path d="M0 175c19-74 95-113 214-113s196 39 214 113l-21 69c-6 20-24 33-45 33H67c-21 0-39-13-45-33Z" fill="#fbf7ee" stroke="#15231d" stroke-width="2.5"/>
+    <ellipse cx="214" cy="174" rx="207" ry="55" fill="#15231d"/>
+    <ellipse cx="214" cy="174" rx="188" ry="43" fill="#b23a2b"/>
+    <g fill="#d2a64c">
+      <circle cx="116" cy="169" r="8"/><circle cx="163" cy="190" r="6"/><circle cx="271" cy="187" r="7"/><circle cx="313" cy="166" r="5"/>
+    </g>
+    <g fill="#fbf7ee" opacity="0.8"><circle cx="212" cy="157" r="5"/><circle cx="243" cy="174" r="4"/><circle cx="178" cy="170" r="4"/></g>
+    <g fill="none" stroke="#fbf7ee" stroke-width="3" stroke-linecap="round" opacity="0.8">
+      <path d="M120 162c23 15 54 18 80 5s52-13 79 3"/><path d="M137 181c20-13 48-15 67-4s48 12 70-1"/>
+    </g>
+    <path d="M327 162 438-74" stroke="#15231d" stroke-width="7" stroke-linecap="round"/>
+    <path d="M351 168 462-68" stroke="#15231d" stroke-width="7" stroke-linecap="round"/>
+    <path d="M364 171c19 6 31 2 39-11" fill="none" stroke="#cf4d2f" stroke-width="4" stroke-linecap="round"/>
+    <text x="214" y="277" text-anchor="middle" fill="#cf4d2f" font-family="Georgia,serif" font-size="20">xiaomian</text>
+  </g>
+  <text x="57" y="87" fill="#15231d" font-family="Georgia,serif" font-size="22" font-style="italic">breakfast is a bowl and a stool</text>
+  <g filter="url(#grain)" opacity="0.35"><rect width="800" height="560" fill="#fbf7ee"/></g>
+</svg>

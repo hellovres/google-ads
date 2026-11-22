@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../lib/site';
+---
+
+<BaseLayout title="Terms of use" description="Terms for using Chongqing Field Guide, including content accuracy, third-party links and intellectual property." noindex>
+  <article class="content-page">
+    <div class="wrap">
+      <span class="eyebrow" style="color: var(--terra);">Legal</span>
+      <h1 class="display">Terms of use</h1>
+      <p class="intro">Effective 22 November 2026. By using this site, you agree to these terms.</p>
+
+      <div class="prose">
+        <h2>Travel information</h2>
+        <p>The guides are planning resources. Transport schedules, ticket rules, visa policies, prices and opening hours can change without notice. Verify critical details with the relevant official source before you travel. The site accepts no responsibility for losses arising from reliance on outdated or incomplete information.</p>
+
+        <h2>Personal responsibility</h2>
+        <p>Travel involves choices about health, safety, terrain, food and transport. Readers remain responsible for their own decisions, insurance, documents and conduct. Follow local rules and venue instructions at each destination.</p>
+
+        <h2>Intellectual property</h2>
+        <p>Text, illustrations, maps and site design are protected by copyright. You may quote a short passage with a clear link to the source. Republishing substantial portions, scraping the library for commercial use or redistributing artwork requires written permission.</p>
+
+        <h2>Third-party links</h2>
+        <p>The site links to booking platforms, official portals and other publishers. Those sites control their own content, availability and terms. A link does not transfer responsibility for their service.</p>
+
+        <h2>Affiliate relationships</h2>
+        <p>Some links may earn a commission. The <a href="/affiliate-disclosure/">affiliate disclosure</a> explains the relationship. Commercial relationships do not determine route recommendations.</p>
+
+        <h2>Changes to the site</h2>
+        <p>Pages may be revised, replaced or removed as the guide develops. These terms may be updated with a new effective date.</p>
+
+        <h2>Contact</h2>
+        <p>Questions about these terms can be sent to <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

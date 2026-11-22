@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-label="Ciqikou old town roofs and stone stairs">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf7ee"/><stop offset="1" stop-color="#e7dac1"/></linearGradient>
+  <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d2a64c"/><stop offset="1" stop-color="#cf4d2f"/></linearGradient>
+  <linearGradient id="river" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#276354"/><stop offset="1" stop-color="#315b78"/></linearGradient>
+  <pattern id="windows" width="18" height="22" patternUnits="userSpaceOnUse"><rect width="18" height="22" fill="#15231d"/><rect x="4" y="5" width="5" height="6" fill="#d2a64c" opacity="0.9"/><rect x="12" y="13" width="3" height="4" fill="#fbf7ee" opacity="0.7"/></pattern>
+  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.07"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+</defs>
+  <rect width="800" height="560" fill="url(#sky)"/>
+  <path d="M0 170c88-33 157-12 226 22 75 37 141 33 208-6 69-40 144-43 221-1 53 29 95 31 145 15v360H0Z" fill="#276354" opacity="0.18"/>
+  <g>
+    <path d="m74 312 110-67 110 67Z" fill="#263b32"/><rect x="95" y="309" width="178" height="154" fill="#f0e6d2" stroke="#15231d" stroke-width="1.5"/>
+    <path d="m254 287 135-81 135 81Z" fill="#15231d"/><rect x="278" y="284" width="222" height="179" fill="#f0e6d2" stroke="#15231d" stroke-width="1.5"/>
+    <path d="m512 322 117-70 117 70Z" fill="#263b32"/><rect x="533" y="319" width="192" height="144" fill="#f0e6d2" stroke="#15231d" stroke-width="1.5"/>
+  </g>
+  <g fill="#15231d">
+    <rect x="129" y="342" width="42" height="58"/><rect x="190" y="342" width="42" height="58"/><rect x="308" y="318" width="49" height="70"/><rect x="380" y="318" width="49" height="70"/><rect x="452" y="318" width="27" height="70"/>
+    <rect x="567" y="348" width="38" height="53"/><rect x="624" y="348" width="38" height="53"/><rect x="681" y="348" width="27" height="53"/>
+  </g>
+  <g fill="#cf4d2f"><circle cx="96" cy="310" r="6"/><circle cx="278" cy="284" r="6"/><circle cx="533" cy="320" r="6"/></g>
+  <path d="M0 463h800v97H0Z" fill="#e2d1b0"/>
+  <g stroke="#15231d" stroke-width="1" opacity="0.35">
+    <path d="M0 486h800M0 510h800M0 534h800"/>
+    <path d="M104 463v43M212 463v43M320 463v43M428 463v43M536 463v43M644 463v20M752 463v43"/>
+  </g>
+  <path d="M0 463h800" stroke="#15231d" stroke-width="2"/>
+  <text x="51" y="87" fill="#15231d" font-family="Georgia,serif" font-size="22" font-style="italic">climb the side lanes early</text>
+  <g filter="url(#grain)" opacity="0.35"><rect width="800" height="560" fill="#fbf7ee"/></g>
+</svg>

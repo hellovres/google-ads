@@ -1,0 +1,60 @@
+---
+import { site } from '../lib/site';
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => path === href || path.startsWith(href);
+---
+
+<header class="site-header" id="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/" aria-label={`${site.name} home`}>
+      <span class="brand-mark" aria-hidden="true">山</span>
+      <span class="brand-copy">
+        <strong>Chongqing</strong>
+        <span>Field Guide</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" aria-label="Primary navigation">
+      {site.nav.map((item) => (
+        <a href={item.href} aria-current={isActive(item.href) ? 'page' : undefined}>{item.label}</a>
+      ))}
+    </nav>
+
+    <div class="header-actions">
+      <a class="search-link" href="/search/" aria-label="Search the field guide">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.8"></circle>
+          <path d="m16 16 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+        </svg>
+      </a>
+      <button class="mobile-toggle" type="button" aria-expanded="false" aria-controls="mobile-panel" aria-label="Open menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 7h18M3 12h18M3 17h18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <nav class="mobile-panel" id="mobile-panel" aria-label="Mobile navigation">
+    <div class="wrap">
+      {site.nav.map((item) => <a href={item.href}>{item.label}</a>)}
+      <a href="/search/">Search</a>
+      <a href="/about/">About</a>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  const header = document.getElementById('site-header');
+  const toggle = document.querySelector('.mobile-toggle');
+  const panel = document.getElementById('mobile-panel');
+  const setHeaderState = () => header && header.classList.toggle('is-scrolled', window.scrollY > 12);
+  setHeaderState();
+  window.addEventListener('scroll', setHeaderState, { passive: true });
+  toggle?.addEventListener('click', () => {
+    const open = panel?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(Boolean(open)));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  });
+</script>

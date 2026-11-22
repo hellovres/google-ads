@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../lib/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: `About ${site.name}`,
+  description: site.description,
+  url: new URL('/about/', site.url).toString(),
+};
+---
+
+<BaseLayout title="About the guide" description="How Chongqing Field Guide is structured, sourced and maintained for English-speaking visitors." jsonLd={jsonLd}>
+  <article class="content-page">
+    <div class="wrap">
+      <span class="eyebrow" style="color: var(--terra);">About</span>
+      <h1 class="display">A field guide built for the moment you arrive.</h1>
+      <p class="intro">Chongqing Field Guide is an English-language planning resource for visitors who want the city to make sense quickly. It combines route logistics, crowd timing, costs, photo angles and practical Mandarin in one consistent format.</p>
+
+      <div class="prose">
+        <h2>Who it is for</h2>
+        <p>The guide is written for English-speaking travelers planning a first or second trip to Chongqing, including Chinese learners at HSK 1–4. The routes assume you are moving independently, using the metro, taxis and your phone, with limited spoken Chinese.</p>
+
+        <h2>The article format</h2>
+        <p>Every guide opens with the decision or route, then adds the practical layer: where to enter, when the crowd changes, what the trip costs, how long the transfer takes and which photo angle is worth the detour. Each article closes with five phrases chosen for that specific stop and an FAQ for the details that tend to surface on the day.</p>
+
+        <h2>How details are handled</h2>
+        <p>Opening hours, ticket rules and transport prices change. The guide treats them as planning ranges and tells you which app or counter to confirm before departure. Where a route depends on a temporary policy, the article links the reader to the relevant official source rather than presenting an old number as permanent.</p>
+        <p>Hand-drawn maps and illustrations are used throughout the site. They show relationships between stops, elevation changes and walking direction more clearly than a generic city photo. Original artwork also keeps the site fast and avoids licensing ambiguity.</p>
+
+        <h2>Corrections</h2>
+        <p>If a route, price or opening time has changed, send the page link and the detail you found to <a href={`mailto:${site.email}`}>{site.email}</a>. Corrections are reviewed against an official source or a current on-the-ground report before the page is updated.</p>
+
+        <h2>Independence</h2>
+        <p>Editorial choices are made for the reader. Affiliate links may support the site, and the <a href="/affiliate-disclosure/">affiliate disclosure</a> explains where they appear. Advertising is kept separate from route advice.</p>
+
+        <h2>Language</h2>
+        <p>The site publishes in English first. Chinese and other language editions are planned after the English library is established.</p>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

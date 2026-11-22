@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-label="Dazu Rock Carvings niche with a serene carved figure">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf7ee"/><stop offset="1" stop-color="#e7dac1"/></linearGradient>
+  <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d2a64c"/><stop offset="1" stop-color="#cf4d2f"/></linearGradient>
+  <linearGradient id="river" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#276354"/><stop offset="1" stop-color="#315b78"/></linearGradient>
+  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.07"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+</defs>
+  <rect width="800" height="560" fill="url(#sky)"/>
+  <path d="M63 472c12-160 69-251 171-274 104-23 225 31 337 11 79-14 135-2 164 41v255H63Z" fill="#e2d1b0"/>
+  <path d="M137 472c17-124 62-193 139-209 75-15 151 20 220 9 53-9 93-1 115 30v184H137Z" fill="#d2a64c" opacity="0.32"/>
+  <path d="M170 472c14-100 50-156 112-169 66-14 126 17 177 8 38-7 68 1 84 24v146H170Z" fill="#f0e6d2"/>
+  <g transform="translate(279 175)">
+    <circle cx="117" cy="62" r="45" fill="#cf4d2f" opacity="0.9"/>
+    <circle cx="117" cy="62" r="56" fill="none" stroke="#b23a2b" stroke-width="2"/>
+    <path d="M97 55c8-5 15-5 22 0M132 55c7-5 14-5 21 0M109 78c6 5 14 5 21 0" fill="none" stroke="#fbf7ee" stroke-width="2" stroke-linecap="round"/>
+    <path d="M117 110c-37 0-70 28-77 65h154c-7-37-40-65-77-65Z" fill="#cf4d2f" opacity="0.9"/>
+    <path d="M63 183c36-24 72-35 108-33s73 14 111 36" fill="none" stroke="#b23a2b" stroke-width="3"/>
+    <path d="M65 153 36 104M169 153l29-49" stroke="#b23a2b" stroke-width="2"/>
+    <circle cx="33" cy="96" r="8" fill="#d2a64c"/><circle cx="201" cy="96" r="8" fill="#d2a64c"/>
+  </g>
+  <g fill="none" stroke="#15231d" opacity="0.25"><path d="M95 424c30-18 55-16 81-2M651 423c-30-18-55-16-81-2"/><path d="M79 448c34-16 63-13 91 1M666 448c-34-16-63-13-91 1"/></g>
+  <text x="55" y="91" fill="#15231d" font-family="Georgia,serif" font-size="22" font-style="italic">go early, look slowly</text>
+  <g filter="url(#grain)" opacity="0.4"><rect width="800" height="560" fill="#fbf7ee"/></g>
+</svg>

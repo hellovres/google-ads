@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../lib/site';
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  name: `Contact ${site.name}`,
+  url: new URL('/contact/', site.url).toString(),
+};
+---
+
+<BaseLayout title="Contact" description="Contact Chongqing Field Guide with corrections, questions or partnership enquiries." jsonLd={jsonLd}>
+  <article class="content-page">
+    <div class="wrap">
+      <span class="eyebrow" style="color: var(--terra);">Contact</span>
+      <h1 class="display">Send a note from the road.</h1>
+      <p class="intro">Corrections are especially welcome. Include the page link, the detail that changed and, when possible, the official source or date you saw it.</p>
+
+      <div class="prose">
+        <h2>Email</h2>
+        <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+
+        <h2>What to send</h2>
+        <ul>
+          <li><strong>Corrections:</strong> the page URL and the exact sentence or figure that needs review.</li>
+          <li><strong>Accessibility or broken links:</strong> the page and the device or browser you used.</li>
+          <li><strong>Editorial questions:</strong> the route you are planning and the month of travel.</li>
+          <li><strong>Partnerships:</strong> the product, audience and proposed placement. Editorial coverage remains independent.</li>
+        </ul>
+
+        <h2>Response time</h2>
+        <p>Messages are reviewed in batches during China Standard Time. A correction that affects safety, transport or payment instructions is prioritised.</p>
+      </div>
+    </div>
+  </article>
+</BaseLayout>

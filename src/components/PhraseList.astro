@@ -1,0 +1,15 @@
+---
+import type { Phrase } from '../lib/categories';
+interface Props { phrases: Phrase[] }
+const { phrases } = Astro.props;
+---
+
+<div class="phrase-list">
+  {phrases.map((phrase) => (
+    <div class="phrase-row">
+      <span class="phrase-chinese" lang="zh-CN">{phrase.chinese}</span>
+      <span class="phrase-pinyin">{phrase.pinyin}</span>
+      <span class="phrase-meaning">{phrase.meaning}</span>
+    </div>
+  ))}
+</div>

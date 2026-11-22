@@ -2,7 +2,43 @@
 
 An English-language travel site about Chongqing for international visitors, built around one idea: **every guide should teach you what to say when you get there**.
 
-Status: planning. No site code yet.
+Status: live-ready static site. Thirty guides are published. The production domain and analytics IDs are configured through environment variables.
+
+## Build and run
+
+The site uses Astro 5 and publishes as static HTML.
+
+```bash
+npm install
+npm run dev
+npm run build
+npm run preview
+```
+
+Production output is written to `dist/`. The Cloudflare Pages build command is `npm run build` and the output directory is `dist`.
+
+Copy `.env.example` to `.env` when deploying and set the production URL, GA4 ID, search-console verification values and AdSense client ID. The site emits analytics and advertising scripts only when the corresponding value is present.
+
+Primary routes:
+
+```
+/                     home
+/guides/              first-time planning
+/attractions/         landmark guides
+/food/                hotpot, noodles and street food
+/itineraries/         1, 3 and 5-day plans, day trips and cruises
+/practical/           visas, payments, connectivity and transport
+/search/              client-side search
+/about/               editorial method
+/contact/             corrections and enquiries
+/privacy/             privacy policy
+/terms/               terms of use
+/affiliate-disclosure/
+```
+
+Each article lives in `src/content/articles/` and uses the shared fields defined in `src/content.config.ts`. The article template adds quick facts, a table of contents, five phrases, photo spots, FAQ, related guides and Article/FAQ structured data.
+
+Brand, domain and contact address currently use `chongqingfieldguide.com` as a placeholder. Replace them in `src/lib/site.ts` and the environment variables before launch.
 
 ## Why this project
 

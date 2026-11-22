@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-label="Chongqing metro map with a monorail train crossing the river">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf7ee"/><stop offset="1" stop-color="#e7dac1"/></linearGradient>
+  <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d2a64c"/><stop offset="1" stop-color="#cf4d2f"/></linearGradient>
+  <linearGradient id="river" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#276354"/><stop offset="1" stop-color="#315b78"/></linearGradient>
+  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.07"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+</defs>
+  <rect width="800" height="560" fill="url(#sky)"/>
+  <g fill="none" stroke-width="6" stroke-linecap="round" opacity="0.9">
+    <path d="M74 394c76-63 132-135 197-178 55-36 94-72 142-76 64-5 121 27 184 7 46-14 91-12 149 20" stroke="#276354"/>
+    <path d="M90 155c63 50 105 88 154 118 55 34 94 66 145 95 53 30 103 59 163 70 44 8 86 5 130-5" stroke="#cf4d2f"/>
+    <path d="M172 450c55-58 98-91 149-103 62-15 110-44 157-85 47-42 93-59 143-53 48 6 78 23 108 44" stroke="#315b78"/>
+    <path d="M93 91c75 6 115 31 167 48 58 19 103 8 154-9 56-19 112-22 194 2 41 12 78 14 116 4" stroke="#d2a64c"/>
+  </g>
+  <g fill="#fbf7ee" stroke="#15231d" stroke-width="2">
+    <circle cx="271" cy="216" r="11"/><circle cx="413" cy="140" r="11"/><circle cx="534" cy="147" r="11"/><circle cx="389" cy="368" r="11"/><circle cx="556" cy="439" r="11"/><circle cx="621" cy="303" r="11"/>
+  </g>
+  <g transform="translate(292 378) rotate(-5)">
+    <rect width="214" height="72" rx="17" fill="#fbf7ee" stroke="#15231d" stroke-width="2"/>
+    <rect x="18" y="13" width="44" height="27" rx="4" fill="#315b78"/><rect x="70" y="13" width="44" height="27" rx="4" fill="#315b78"/><rect x="122" y="13" width="44" height="27" rx="4" fill="#315b78"/>
+    <circle cx="44" cy="76" r="8" fill="#15231d"/><circle cx="170" cy="76" r="8" fill="#15231d"/>
+    <text x="183" y="34" text-anchor="end" fill="#cf4d2f" font-family="DM Sans,sans-serif" font-size="8" letter-spacing="1">MONORAIL</text>
+  </g>
+  <text x="51" y="515" fill="#15231d" font-family="Georgia,serif" font-size="21" font-style="italic">line 2 is the scenic route</text>
+  <g filter="url(#grain)" opacity="0.35"><rect width="800" height="560" fill="#fbf7ee"/></g>
+</svg>

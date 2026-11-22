@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-label="Yangtze River cableway crossing between two hills">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf7ee"/><stop offset="1" stop-color="#e7dac1"/></linearGradient>
+  <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d2a64c"/><stop offset="1" stop-color="#cf4d2f"/></linearGradient>
+  <linearGradient id="river" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#276354"/><stop offset="1" stop-color="#315b78"/></linearGradient>
+  <pattern id="windows" width="18" height="22" patternUnits="userSpaceOnUse"><rect width="18" height="22" fill="#15231d"/><rect x="4" y="5" width="5" height="6" fill="#d2a64c" opacity="0.9"/><rect x="12" y="13" width="3" height="4" fill="#fbf7ee" opacity="0.7"/></pattern>
+  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.07"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+</defs>
+  <rect width="800" height="560" fill="url(#sky)"/>
+  <circle cx="643" cy="117" r="68" fill="url(#sun)" opacity="0.85"/>
+  <path d="M0 379c58-26 104-18 149 12 52 35 91 31 139-6 41-31 76-25 113 4 41 32 75 27 111-1 51-40 99-44 166-8 45 24 84 22 122 1v179H0Z" fill="#276354" opacity="0.35"/>
+  <path d="M0 453h800v107H0Z" fill="url(#river)"/>
+  <g fill="none" stroke="#fbf7ee" opacity="0.25"><path d="M0 481c105-17 189-5 271 16 95 24 180 22 272-2 88-23 167-17 257 5" stroke-width="1.5"/><path d="M0 516c94-15 171-4 248 13 98 22 183 20 272-3 94-24 171-16 280 8"/></g>
+  <path d="M53 319h690" stroke="#15231d" stroke-width="2"/>
+  <path d="M79 319 120 182M721 319l-42-137" stroke="#15231d" stroke-width="6"/>
+  <path d="M754 319 711 182M46 319l42-137" stroke="#15231d" stroke-width="6"/>
+  <g transform="translate(294 330)">
+    <path d="M0 0h71l-8 49H9Z" fill="#cf4d2f"/>
+    <rect x="8" y="8" width="55" height="23" fill="#fbf7ee" opacity="0.9"/>
+    <path d="M20 49v19M51 49v19" stroke="#15231d" stroke-width="4"/>
+    <path d="M35 0v-19" stroke="#15231d" stroke-width="4"/>
+    <circle cx="35" cy="-22" r="5" fill="#d2a64c"/>
+  </g>
+  <g transform="translate(492 330)">
+    <path d="M0 0h71l-8 49H9Z" fill="#d2a64c"/>
+    <rect x="8" y="8" width="55" height="23" fill="#fbf7ee" opacity="0.9"/>
+    <path d="M20 49v19M51 49v19" stroke="#15231d" stroke-width="4"/>
+    <path d="M35 0v-19" stroke="#15231d" stroke-width="4"/>
+    <circle cx="35" cy="-22" r="5" fill="#cf4d2f"/>
+  </g>
+  <text x="48" y="526" fill="#fbf7ee" font-family="Georgia,serif" font-size="20" font-style="italic">cross for the commute, stay for the view</text>
+  <g filter="url(#grain)" opacity="0.35"><rect width="800" height="560" fill="#fbf7ee"/></g>
+</svg>

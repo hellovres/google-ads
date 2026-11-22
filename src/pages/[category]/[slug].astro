@@ -1,0 +1,21 @@
+---
+import { render } from 'astro:content';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { getAllArticles, type ArticleEntry } from '../../lib/articles';
+
+export async function getStaticPaths() {
+  const articles = await getAllArticles();
+  return articles.map((article) => ({
+    params: { category: article.data.category, slug: article.id },
+    props: { article },
+  }));
+}
+
+interface Props { article: ArticleEntry }
+const { article } = Astro.props;
+const { Content, headings } = await render(article);
+---
+
+<ArticleLayout article={article} headings={headings}>
+  <Content />
+</ArticleLayout>

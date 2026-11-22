@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-label="Split illustration comparing Chongqing mountain city and Chengdu teahouse">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf7ee"/><stop offset="1" stop-color="#e7dac1"/></linearGradient>
+  <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d2a64c"/><stop offset="1" stop-color="#cf4d2f"/></linearGradient>
+  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.07"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+</defs>
+  <rect width="800" height="560" fill="url(#sky)"/>
+  <path d="M400 0v560" stroke="#15231d" stroke-width="2"/>
+  <g clip-path="url(#leftClip)">
+    <rect width="400" height="560" fill="#276354" opacity="0.14"/>
+    <path d="M0 291c40-72 70-106 97-100 28 6 32 63 58 79 21 13 34-43 55-126 14-55 27-46 38 28 8 55 17 96 32 93 20-4 22-61 43-75 20-14 34 49 49 91 10 30 20 34 28 10v259H0Z" fill="#276354" opacity="0.55"/>
+    <g fill="#15231d">
+      <rect x="30" y="303" width="57" height="154"/><rect x="98" y="331" width="43" height="126"/><rect x="153" y="279" width="69" height="178"/><rect x="237" y="322" width="51" height="135"/><rect x="301" y="291" width="65" height="166"/>
+    </g>
+    <g fill="#d2a64c" opacity="0.75"><rect x="42" y="316" width="7" height="9"/><rect x="58" y="337" width="7" height="9"/><rect x="166" y="294" width="8" height="10"/><rect x="188" y="320" width="8" height="10"/><rect x="314" y="307" width="8" height="10"/><rect x="337" y="332" width="8" height="10"/></g>
+    <path d="M0 466h400v94H0Z" fill="#315b78"/>
+    <path d="M0 486c77-11 130 0 177 15 42 14 84 13 123-1 32-11 66-15 100-8" fill="none" stroke="#fbf7ee" stroke-width="1.2" opacity="0.35"/>
+    <text x="29" y="91" fill="#15231d" font-family="DM Sans,sans-serif" font-size="10" letter-spacing="2">THE MOUNTAIN CITY</text>
+    <text x="29" y="512" fill="#fbf7ee" font-family="Georgia,serif" font-size="19" font-style="italic">elevation + night energy</text>
+  </g>
+  <g>
+    <rect x="400" width="400" height="560" fill="#cf4d2f" opacity="0.05"/>
+    <path d="M400 415c78-18 133-1 191 17 70 23 134 23 209 2v126H400Z" fill="#276354" opacity="0.13"/>
+    <g transform="translate(462 308)">
+      <path d="M0 45h261v24H0Z" fill="#fbf7ee" stroke="#15231d" stroke-width="2"/>
+      <path d="M36 45V0h31v45M188 45V0h31v45" fill="#fbf7ee" stroke="#15231d" stroke-width="1.5"/>
+      <path d="M23 0h49l-7-19H30ZM175 0h49l-7-19h-35Z" fill="#15231d"/>
+      <ellipse cx="132" cy="45" rx="57" ry="17" fill="#d2a64c" opacity="0.45"/>
+      <path d="M89 45V22h85v23" fill="none" stroke="#15231d" stroke-width="1.2"/>
+      <path d="M144 23c-18-25-41-28-57-11M144 23c16-21 35-23 49-9" fill="none" stroke="#cf4d2f" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+    <circle cx="690" cy="200" r="58" fill="#d2a64c" opacity="0.4"/>
+    <g fill="none" stroke="#15231d" opacity="0.45"><path d="M447 122c55-18 94 1 122 20s52 14 75-4 61-18 101 6" stroke-width="1"/><path d="M447 151c55-14 94 5 122 22s52 11 75-6 61-15 101 7" stroke-width="1"/></g>
+    <text x="430" y="91" fill="#15231d" font-family="DM Sans,sans-serif" font-size="10" letter-spacing="2">THE TEAHOUSE CITY</text>
+    <text x="430" y="512" fill="#15231d" font-family="Georgia,serif" font-size="19" font-style="italic">flat streets + slower afternoons</text>
+  </g>
+  <text x="400" y="540" text-anchor="middle" fill="#fbf7ee" font-family="DM Sans,sans-serif" font-size="10" letter-spacing="3">CQ / CD</text>
+  <defs><clipPath id="leftClip"><rect width="400" height="560"/></clipPath></defs>
+  <g filter="url(#grain)" opacity="0.35"><rect width="800" height="560" fill="#fbf7ee"/></g>
+</svg>

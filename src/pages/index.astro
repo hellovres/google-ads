@@ -1,0 +1,183 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import CategoryCard from '../components/CategoryCard.astro';
+import PhraseList from '../components/PhraseList.astro';
+import { getAllArticles, getFeaturedArticles, articlePath } from '../lib/articles';
+import { categories, categoryOrder } from '../lib/categories';
+import { site } from '../lib/site';
+
+const featured = await getFeaturedArticles(3);
+const all = await getAllArticles();
+const latest = all.filter((article) => !featured.some((item) => item.id === article.id)).slice(0, 6);
+const oneDay = all.find((article) => article.id === 'chongqing-1-day-itinerary');
+const threeDay = all.find((article) => article.id === 'chongqing-3-day-itinerary');
+const fiveDay = all.find((article) => article.id === 'chongqing-5-day-itinerary');
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: site.name,
+  url: site.url,
+  description: site.description,
+  inLanguage: 'en',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: `${site.url}/search/?q={search_term_string}`,
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+const organizationJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: site.name,
+  url: site.url,
+  email: site.email,
+  description: site.description,
+};
+---
+
+<BaseLayout
+  title={site.name}
+  description={site.description}
+  image="/images/og-cover.svg"
+  jsonLd={[websiteJsonLd, organizationJsonLd]}
+>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <span class="eyebrow">Chongqing, China · 29.56°N 106.55°E</span>
+          <h1 class="display">The mountain city, <em>decoded.</em></h1>
+          <p class="hero-lead">
+            An English field guide to Chongqing's layered streets, late-night hotpot and river-crossing cable cars. Every route comes with costs, crowd timing, photo spots and the Mandarin to get you through the next stop.
+          </p>
+          <div class="hero-actions">
+            <a class="btn is-cream" href="/itineraries/chongqing-3-day-itinerary/">Start with 3 days <span class="arrow" aria-hidden="true">→</span></a>
+            <a class="btn is-light" style="color: var(--cream); border-color: rgba(251,247,238,.4);" href="/guides/">Browse the guides</a>
+          </div>
+        </div>
+
+        <div class="hero-art" aria-hidden="true">
+          <img src="/images/hero-chongqing.svg" alt="" width="900" height="760" fetchpriority="high" />
+          <div class="hero-tags">
+            <div class="hero-tag one"><strong>8D streets</strong><span>Read the elevation</span></div>
+            <div class="hero-tag two"><strong>Hotpot 101</strong><span>Order without panic</span></div>
+            <div class="hero-tag three"><strong>5 phrases</strong><span>For every stop</span></div>
+          </div>
+          <div class="hero-stamp">Jiefangbei / Liziba<br />Yangtze / Hongyadong</div>
+        </div>
+      </div>
+
+      <div class="hero-meta">
+        <div><strong>30</strong><span>Field guides</span></div>
+        <div><strong>5</strong><span>Ways into the city</span></div>
+        <div><strong>5</strong><span>Phrases per stop</span></div>
+        <div><strong>2026</strong><span>Practical details</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" style="color: var(--terra);">Start here</span>
+          <h2 style="margin-top: 16px;">Three guides that do the heavy lifting.</h2>
+        </div>
+        <p>Begin with the shape of the trip, a route that respects the hills, and one meal you will remember for the right reasons.</p>
+      </div>
+
+      <div class="featured-grid">
+        <ArticleCard article={featured[0]} eager />
+        <div class="featured-stack">
+          {featured.slice(1).map((article) => <ArticleCard article={article} />)}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-rule">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" style="color: var(--terra);">Find your way</span>
+          <h2 style="margin-top: 16px;">Choose the question you need answered.</h2>
+        </div>
+        <p>Planning, seeing, eating, moving or sorting out the practical details. Each section is built around decisions, not a list of attractions.</p>
+      </div>
+      <div class="category-grid">
+        {categoryOrder.map((slug, index) => <CategoryCard category={categories[slug]} index={index} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-rule">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" style="color: var(--terra);">Plan by day</span>
+          <h2 style="margin-top: 16px;">A route for the time you actually have.</h2>
+        </div>
+        <a class="text-link" href="/itineraries/">All itineraries <span aria-hidden="true">→</span></a>
+      </div>
+
+      <div class="route-strip">
+        {[
+          { days: '01', title: oneDay?.data.title ?? 'One day in Chongqing', desc: 'The compact route for a layover or a single free day.', href: oneDay ? articlePath(oneDay) : '/itineraries/' },
+          { days: '03', title: threeDay?.data.title ?? 'The 3-day plan', desc: 'The best first-visit balance of city, river and food.', href: threeDay ? articlePath(threeDay) : '/itineraries/' },
+          { days: '05', title: fiveDay?.data.title ?? 'The 5-day plan', desc: 'Add a day trip and slow the city down.', href: fiveDay ? articlePath(fiveDay) : '/itineraries/' },
+        ].map((item) => (
+          <a class="route-card" href={item.href}>
+            <div class="days"><strong>{item.days}</strong><span>days</span></div>
+            <h3>{item.title}</h3>
+            <p>{item.desc}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-rule">
+    <div class="wrap phrase-panel">
+      <div class="phrase-intro">
+        <span class="eyebrow" style="color: var(--terra);">Speak a little</span>
+        <h2 style="margin-top: 16px;">The city opens differently in Mandarin.</h2>
+        <p>Five phrases cover most first encounters. They are chosen for the moment you are standing at a counter, a queue or a taxi window, phone in hand.</p>
+        <a class="btn is-light" style="margin-top: 26px;" href="/practical/sichuanese-phrases/">Learn the phrasebook <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <PhraseList phrases={categories.guides.phrases} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="editorial-band">
+        <div>
+          <span class="eyebrow">Editorial method</span>
+          <h2 style="margin-top: 16px;">Every guide ends with what to say.</h2>
+        </div>
+        <div>
+          <p>Routes are grouped by elevation and metro line. Costs and opening hours are treated as planning ranges, with a note on what to confirm in the app before you go. Each stop includes five phrases, a photo angle and a realistic queue window.</p>
+          <a class="btn is-cream" style="margin-top: 24px;" href="/about/">How the guide is built <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-rule">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <span class="eyebrow" style="color: var(--terra);">Latest field notes</span>
+          <h2 style="margin-top: 16px;">New routes, revised details.</h2>
+        </div>
+        <a class="text-link" href="/guides/">All guides <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="card-grid">
+        {latest.map((article) => <ArticleCard article={article} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-label="Three Gorges cruise boat between steep river cliffs">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf7ee"/><stop offset="1" stop-color="#e7dac1"/></linearGradient>
+  <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d2a64c"/><stop offset="1" stop-color="#cf4d2f"/></linearGradient>
+  <linearGradient id="river" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#276354"/><stop offset="1" stop-color="#315b78"/></linearGradient>
+  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.07"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+</defs>
+  <rect width="800" height="560" fill="url(#sky)"/>
+  <circle cx="659" cy="104" r="56" fill="url(#sun)" opacity="0.75"/>
+  <path d="M0 413c38-134 74-213 119-238 32-18 54 39 76 96 18 47 33 64 53 43 25-25 30-132 67-158 30-21 50 83 72 129 16 34 31 41 49 17 27-38 31-143 66-161 36-18 55 99 78 159 19 49 44 74 83 58 37-16 54-61 83-58 28 3 39 49 54 135v172H0Z" fill="#276354" opacity="0.55"/>
+  <path d="M0 453c36-96 69-149 107-160 30-8 49 26 70 74 17 39 32 53 52 37 28-23 31-102 66-119 27-13 44 66 64 99 15 25 30 28 46 7 23-32 28-108 60-119 31-10 50 68 73 112 18 35 40 47 71 28 29-18 45-47 73-42 25 5 39 34 61 83v127H0Z" fill="#15231d" opacity="0.3"/>
+  <path d="M0 477h800v83H0Z" fill="url(#river)"/>
+  <g fill="none" stroke="#fbf7ee" opacity="0.24"><path d="M0 499c99-13 173-2 246 14 91 20 172 17 259-2 89-19 169-14 295 7" stroke-width="1.2"/><path d="M0 527c92-10 163 0 234 12 98 17 181 13 269-3 89-16 171-9 297 5"/></g>
+  <g transform="translate(250 389)">
+    <path d="M0 62h307l-23-42H25Z" fill="#fbf7ee" stroke="#15231d" stroke-width="2"/>
+    <rect x="47" y="0" width="214" height="24" rx="3" fill="#fbf7ee" stroke="#15231d" stroke-width="2"/>
+    <rect x="72" y="30" width="44" height="17" rx="2" fill="#315b78"/><rect x="129" y="30" width="44" height="17" rx="2" fill="#315b78"/><rect x="186" y="30" width="44" height="17" rx="2" fill="#315b78"/>
+    <rect x="96" y="-27" width="115" height="26" rx="3" fill="#cf4d2f"/>
+    <path d="M32 62h245" stroke="#15231d" stroke-width="2"/>
+    <path d="M112 works" fill="none"/>
+  </g>
+  <path d="M101 471c19-66 40-112 69-139M679 473c-21-67-43-113-72-140" fill="none" stroke="#fbf7ee" stroke-width="1" opacity="0.35" stroke-dasharray="4 5"/>
+  <text x="54" y="91" fill="#15231d" font-family="Georgia,serif" font-size="22" font-style="italic">choose the stretch, then the ship</text>
+  <g filter="url(#grain)" opacity="0.35"><rect width="800" height="560" fill="#fbf7ee"/></g>
+</svg>

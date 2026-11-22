@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 560" role="img" aria-label="Compact one-day route loop through central Chongqing">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fbf7ee"/><stop offset="1" stop-color="#e7dac1"/></linearGradient>
+  <linearGradient id="sun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d2a64c"/><stop offset="1" stop-color="#cf4d2f"/></linearGradient>
+  <filter id="grain"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="2"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope="0.07"/></feComponentTransfer><feBlend in="SourceGraphic" mode="multiply"/></filter>
+</defs>
+  <rect width="800" height="560" fill="url(#sky)"/>
+  <g fill="none" stroke="#276354" opacity="0.14"><path d="M-20 123c88-33 151-7 210 30s108 30 162-9 102-36 165-3 109 41 178 9" stroke-width="1.4"/><path d="M-20 169c83-26 145-4 203 30s104 26 159-12 107-29 165 4 107 36 184 20" stroke-width="1.4"/><path d="M-20 215c90-22 145 3 200 32s105 25 160-13 102-30 159 3 108 32 187 19" stroke-width="1.4"/><path d="M-20 261c81-13 139 4 196 30s108 20 162-16 106-24 162 7 96 27 176 17" stroke-width="1.4"/></g>
+  <ellipse cx="399" cy="307" rx="237" ry="154" fill="none" stroke="#cf4d2f" stroke-width="5" stroke-dasharray="12 10"/>
+  <g>
+    <circle cx="256" cy="178" r="37" fill="#15231d"/><text x="256" y="185" text-anchor="middle" fill="#fbf7ee" font-family="Georgia,serif" font-size="18">09</text>
+    <circle cx="557" cy="211" r="37" fill="#15231d"/><text x="557" y="218" text-anchor="middle" fill="#fbf7ee" font-family="Georgia,serif" font-size="18">12</text>
+    <circle cx="568" cy="404" r="37" fill="#15231d"/><text x="568" y="411" text-anchor="middle" fill="#fbf7ee" font-family="Georgia,serif" font-size="18">16</text>
+    <circle cx="241" cy="408" r="37" fill="#15231d"/><text x="241" y="415" text-anchor="middle" fill="#fbf7ee" font-family="Georgia,serif" font-size="18">20</text>
+  </g>
+  <g fill="#fbf7ee" stroke="#15231d" stroke-width="1.4">
+    <rect x="297" y="135" width="114" height="47" rx="4"/><rect x="608" y="189" width="118" height="47" rx="4"/><rect x="616" y="382" width="118" height="47" rx="4"/><rect x="81" y="386" width="120" height="47" rx="4"/>
+  </g>
+  <g fill="#15231d" font-family="DM Sans,sans-serif" font-size="9" letter-spacing="1">
+    <text x="310" y="155">Liziba</text><text x="310" y="170" fill="#67736c" font-size="7">monorail view</text>
+    <text x="621" y="209">Jiefangbei</text><text x="621" y="224" fill="#67736c" font-size="7">lunch + walk</text>
+    <text x="629" y="402">Cableway</text><text x="629" y="417" fill="#67736c" font-size="7">river crossing</text>
+    <text x="94" y="406">Hongyadong</text><text x="94" y="421" fill="#67736c" font-size="7">night lights</text>
+  </g>
+  <circle cx="399" cy="307" r="45" fill="#d2a64c"/>
+  <text x="399" y="303" text-anchor="middle" fill="#15231d" font-family="Georgia,serif" font-size="13">ONE</text>
+  <text x="399" y="319" text-anchor="middle" fill="#15231d" font-family="Georgia,serif" font-size="13">DAY</text>
+  <g filter="url(#grain)" opacity="0.35"><rect width="800" height="560" fill="#fbf7ee"/></g>
+</svg>
