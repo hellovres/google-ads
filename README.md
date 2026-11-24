@@ -2,7 +2,7 @@
 
 An English-language travel site about Chongqing for international visitors, built around one idea: **every guide should teach you what to say when you get there**.
 
-Status: live-ready static site. Thirty guides are published. The production domain and analytics IDs are configured through environment variables.
+Status: live-ready static site. Twenty-three guides are published. Seven itinerary drafts are retained for a later release. The production domain and analytics IDs are configured through environment variables.
 
 ## Build and run
 
@@ -26,7 +26,6 @@ Primary routes:
 /guides/              first-time planning
 /attractions/         landmark guides
 /food/                hotpot, noodles and street food
-/itineraries/         1, 3 and 5-day plans, day trips and cruises
 /practical/           visas, payments, connectivity and transport
 /search/              client-side search
 /about/               editorial method
@@ -59,7 +58,7 @@ Brand, domain and contact address currently use `chongqingfieldguide.com` as a p
 1. **First-time visitor** - itinerary, where to stay, is it worth it, how many days.
 2. **Attractions deep dives** - Liziba, Hongyadong, Kuixinglou, Ciqikou, cableway, Nanbin Road, Eling Park.
 3. **Food** - hotpot ordering, spice levels, xiaomian, street food, breakfast, night markets.
-4. **Day trips and transport** - Wulong, Dazu, Fuling 816, Three Gorges cruise, airport, rail stations, metro.
+4. **Arrival and transport** - airport, rail stations, metro, Didi and ticket setup. Day-trip drafts remain outside the current release.
 5. **Practical and language** - 240-hour visa-free transit, payments, eSIM, Didi, ticket booking, survival Mandarin.
 
 ## Site structure
@@ -69,7 +68,6 @@ Brand, domain and contact address currently use `chongqingfieldguide.com` as a p
 /guides/              pillar pages
 /attractions/         location deep dives
 /food/                restaurant and dish guides
-/itineraries/         1, 2, 3 and 5 day plans
 /practical/           visas, payments, transport, apps
 ```
 

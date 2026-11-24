@@ -1,5 +1,6 @@
-export const categoryOrder = ['guides', 'attractions', 'food', 'itineraries', 'practical'] as const;
-export type CategorySlug = (typeof categoryOrder)[number];
+export const categoryOrder = ['guides', 'attractions', 'food', 'practical'] as const;
+export const hiddenCategoryOrder = ['itineraries'] as const;
+export type CategorySlug = (typeof categoryOrder)[number] | (typeof hiddenCategoryOrder)[number];
 
 export type Phrase = {
   chinese: string;
@@ -118,6 +119,6 @@ export const categories: Record<CategorySlug, Category> = {
 };
 
 export const isCategory = (value: string): value is CategorySlug =>
-  (categoryOrder as readonly string[]).includes(value);
+  ([...categoryOrder, ...hiddenCategoryOrder] as readonly string[]).includes(value);
 
 export const getCategory = (slug: string) => (isCategory(slug) ? categories[slug] : undefined);

@@ -17,7 +17,6 @@ export const site = {
     { label: 'First-time guides', href: '/guides/' },
     { label: 'Attractions', href: '/attractions/' },
     { label: 'Food', href: '/food/' },
-    { label: 'Itineraries', href: '/itineraries/' },
     { label: 'Practical', href: '/practical/' },
   ],
 };

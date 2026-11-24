@@ -1,5 +1,5 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
-import { categories, type CategorySlug } from './categories';
+import { categories, categoryOrder, type CategorySlug } from './categories';
 
 export type ArticleEntry = CollectionEntry<'articles'>;
 
@@ -10,7 +10,10 @@ export const sortByDate = (a: ArticleEntry, b: ArticleEntry) =>
 
 export async function getAllArticles() {
   const articles = await getCollection('articles');
-  return articles.sort(sortByDate);
+  const publishedCategories = new Set<string>(categoryOrder);
+  return articles
+    .filter((article) => publishedCategories.has(article.data.category))
+    .sort(sortByDate);
 }
 
 export async function getFeaturedArticles(limit = 3) {
