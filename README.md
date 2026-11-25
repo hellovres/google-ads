@@ -19,6 +19,8 @@ Production output is written to `dist/`. The Cloudflare Pages build command is `
 
 Copy `.env.example` to `.env` when deploying and set the production URL, GA4 ID, search-console verification values and AdSense client ID. The site emits analytics and advertising scripts only when the corresponding value is present.
 
+See `docs/deploy-cloudflare.md` for the Cloudflare Pages setup, environment variables, custom domain and caching headers. Build settings are pinned in `wrangler.toml` and the Node version in `.nvmrc`.
+
 Primary routes:
 
 ```
