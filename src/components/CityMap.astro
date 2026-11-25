@@ -1,677 +1,591 @@
 ---
-const routes = [
-  {
-    href: '/guides/first-time-chongqing-guide/',
-    number: '01',
-    label: 'Most useful first',
-    title: 'First-time guide',
-    description: 'What to expect, how the city works and where to begin.',
-  },
-  {
-    href: '/attractions/hongyadong-night-crowds/',
-    number: '02',
-    label: 'After dark',
-    title: 'Hongyadong, timed right',
-    description: 'The view worth waiting for, and where to stand when it is packed.',
-  },
-  {
-    href: '/attractions/yangtze-river-cableway-queue/',
-    number: '03',
-    label: 'Cross the water',
-    title: 'The cableway',
-    description: 'Tickets, queue strategy and the better side to start from.',
-  },
-];
+import 'maplibre-gl/dist/maplibre-gl.css';
+import { featuredPlaces, placeCategories, placeCollection, places } from '../data/chongqing-places';
+
+const placeCount = places.length;
 ---
 
-<div class="atlas-board">
-  <section class="city-map" aria-labelledby="city-map-title">
-    <header class="city-map__top">
-      <div>
-        <span class="map-overline"><i aria-hidden="true"></i>Central Chongqing</span>
-        <h2 id="city-map-title">The river bends</h2>
-      </div>
-      <span class="map-view">First-visit map · 08 places</span>
-    </header>
+<section class="map-home" aria-labelledby="map-home-title">
+  <div id="chongqing-map" class="map-canvas" role="region" aria-label="Interactive map of attractions across Chongqing"></div>
 
-    <div class="map-stage">
-      <svg class="map-art" viewBox="0 0 960 690" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">
-        <defs>
-          <linearGradient id="map-paper" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#f6f0e4"></stop>
-            <stop offset="1" stop-color="#e8decc"></stop>
-          </linearGradient>
-          <linearGradient id="river-band" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stop-color="#b8d1ca"></stop>
-            <stop offset="1" stop-color="#86b2ad"></stop>
-          </linearGradient>
-          <pattern id="map-grid" width="32" height="32" patternUnits="userSpaceOnUse">
-            <circle cx="1" cy="1" r="0.8" fill="#173229" opacity="0.16"></circle>
-          </pattern>
-          <filter id="water-soften" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="1.5"></feGaussianBlur>
-          </filter>
-          <path id="jialing-line" d="M -30 85 C 90 158 168 121 254 165 C 330 204 355 260 445 302 C 525 338 575 352 632 344 C 676 338 696 370 707 424"></path>
-          <path id="yangtze-line" d="M -35 644 C 90 610 142 543 214 515 C 286 486 323 444 408 430 C 500 414 559 455 641 436 C 729 415 806 357 991 330"></path>
-        </defs>
+  <div class="map-panel">
+    <span class="map-kicker">Chongqing Field Guide · {placeCount} places</span>
+    <h1 id="map-home-title">Read all of Chongqing.</h1>
+    <p>City landmarks and mountain-country destinations on one map. Zoom into the urban core to separate the central attractions.</p>
+    <div class="map-actions" aria-label="Map views">
+      <button class="is-active" type="button" data-map-view="province" disabled>Whole city</button>
+      <button type="button" data-map-view="core" disabled>City core</button>
+    </div>
+  </div>
 
-        <rect width="960" height="690" fill="url(#map-paper)"></rect>
-        <rect width="960" height="690" fill="url(#map-grid)"></rect>
+  <div class="map-key" aria-label="Map legend">
+    <span><i class="is-city"></i>City landmark</span>
+    <span><i class="is-region"></i>Across Chongqing</span>
+    <small>OpenFreeMap · map data © OpenStreetMap contributors</small>
+  </div>
 
-        <g class="topography" fill="none" stroke="#968f7e" stroke-width="1.05" opacity="0.34">
-          <path d="M-40 185 C65 130 116 144 188 93 C238 56 288 26 365 33"></path>
-          <path d="M-18 205 C84 154 138 167 207 116 C261 78 304 50 375 57"></path>
-          <path d="M-7 226 C95 176 151 190 222 138 C276 101 323 76 389 82"></path>
-          <path d="M-25 251 C85 203 154 214 234 163 C298 121 345 105 414 111"></path>
-          <path d="M-39 275 C82 229 164 243 254 192 C329 150 372 135 438 142"></path>
-          <path d="M12 333 C103 293 160 303 241 261 C318 222 380 214 441 222"></path>
-          <path d="M50 560 C83 521 124 502 182 503 C239 503 268 475 302 453"></path>
-          <path d="M52 592 C99 548 145 530 202 532 C256 534 288 509 326 483"></path>
-          <path d="M61 623 C119 582 167 566 226 570 C287 574 322 550 362 520"></path>
-          <path d="M78 657 C138 615 193 603 251 610 C316 619 355 595 403 560"></path>
-          <path d="M568 602 C643 564 683 531 745 549 C804 566 846 532 914 498"></path>
-          <path d="M574 633 C650 595 695 563 757 581 C814 598 865 559 933 526"></path>
-          <path d="M611 671 C676 639 723 606 785 624 C842 640 898 607 968 558"></path>
-        </g>
+  <div class="map-loading" role="status"><span></span>Loading map</div>
 
-        <g class="rivers">
-          <path d="M -30 85 C 90 158 168 121 254 165 C 330 204 355 260 445 302 C 525 338 575 352 632 344 C 676 338 696 370 707 424" fill="none" stroke="#d9e7e1" stroke-width="88" stroke-linecap="round" opacity="0.85"></path>
-          <path d="M -30 85 C 90 158 168 121 254 165 C 330 204 355 260 445 302 C 525 338 575 352 632 344 C 676 338 696 370 707 424" fill="none" stroke="url(#river-band)" stroke-width="65" stroke-linecap="round"></path>
-          <path d="M -30 85 C 90 158 168 121 254 165 C 330 204 355 260 445 302 C 525 338 575 352 632 344 C 676 338 696 370 707 424" fill="none" stroke="#eaf2ed" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 18" opacity="0.9"></path>
+  <noscript>
+    <div class="map-noscript">The interactive map needs JavaScript. Use the guide links below.</div>
+  </noscript>
+</section>
 
-          <path d="M -35 644 C 90 610 142 543 214 515 C 286 486 323 444 408 430 C 500 414 559 455 641 436 C 729 415 806 357 991 330" fill="none" stroke="#d9e7e1" stroke-width="116" stroke-linecap="round" opacity="0.85"></path>
-          <path d="M -35 644 C 90 610 142 543 214 515 C 286 486 323 444 408 430 C 500 414 559 455 641 436 C 729 415 806 357 991 330" fill="none" stroke="url(#river-band)" stroke-width="90" stroke-linecap="round"></path>
-          <path d="M -35 644 C 90 610 142 543 214 515 C 286 486 323 444 408 430 C 500 414 559 455 641 436 C 729 415 806 357 991 330" fill="none" stroke="#eaf2ed" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 20" opacity="0.9"></path>
-        </g>
-
-        <g class="map-labels" fill="#355a4e" font-size="12" font-weight="700" letter-spacing="2.6">
-          <text x="85" y="145" transform="rotate(20 85 145)">JIALING RIVER · 嘉陵江</text>
-          <text x="270" y="598" transform="rotate(-9 270 598)">YANGTZE RIVER · 长江</text>
-          <text x="324" y="495" fill="#67776f" font-size="15" letter-spacing="3.5">NAN'AN</text>
-          <text x="424" y="373" fill="#67776f" font-size="15" letter-spacing="3.5">YUZHONG</text>
-          <text x="215" y="233" fill="#67776f" font-size="13" letter-spacing="3.2">SHAPINGBA</text>
-          <text x="724" y="264" fill="#67776f" font-size="13" letter-spacing="3.2">JIANGBEI</text>
-        </g>
-
-        <g class="streets" fill="none" stroke="#f8f2e6" stroke-width="5.2" opacity="0.9">
-          <path d="M504 267 C573 290 609 330 694 351"></path>
-          <path d="M542 399 C590 369 644 361 710 386"></path>
-          <path d="M598 241 L548 456"></path>
-          <path d="M658 252 L620 453"></path>
-          <path d="M423 332 C482 348 542 326 626 359"></path>
-          <path d="M436 378 C513 382 579 399 649 407"></path>
-          <path d="M461 455 C521 427 594 431 681 463"></path>
-        </g>
-        <g class="streets" fill="none" stroke="#b8ad98" stroke-width="1.1" opacity="0.7">
-          <path d="M504 267 C573 290 609 330 694 351"></path>
-          <path d="M542 399 C590 369 644 361 710 386"></path>
-          <path d="M598 241 L548 456"></path>
-          <path d="M658 252 L620 453"></path>
-          <path d="M423 332 C482 348 542 326 626 359"></path>
-          <path d="M436 378 C513 382 579 399 649 407"></path>
-          <path d="M461 455 C521 427 594 431 681 463"></path>
-        </g>
-
-        <g class="trails" fill="none" stroke="#c64f35" stroke-width="2" stroke-dasharray="4 9" stroke-linecap="round" opacity="0.7">
-          <path d="M264 303 C311 321 352 354 398 381 C452 413 504 425 562 431 C615 437 659 450 716 437"></path>
-          <path d="M264 303 C311 321 352 354 398 381 C452 413 504 425 562 431 C615 437 659 450 716 437"></path>
-        </g>
-
-        <g class="bridges" fill="none" stroke="#fffaf0" stroke-width="9" stroke-linecap="round">
-          <path d="M746 316 L802 370"></path>
-          <path d="M339 484 L323 548"></path>
-          <path d="M568 444 L651 397"></path>
-        </g>
-        <g class="bridges" fill="none" stroke="#5c7067" stroke-width="1.5" stroke-linecap="round">
-          <path d="M746 316 L802 370"></path>
-          <path d="M339 484 L323 548"></path>
-          <path d="M568 444 L651 397"></path>
-        </g>
-
-        <g class="metro-line" fill="none" stroke="#cf4d2f" stroke-width="3.2" stroke-linecap="round" opacity="0.88">
-          <path d="M193 350 C301 330 381 370 475 371 C578 372 632 342 728 342 C805 342 849 365 918 354"></path>
-        </g>
-        <g class="metro-stops" fill="#f8f2e6" stroke="#cf4d2f" stroke-width="2">
-          <circle cx="270" cy="347" r="5"></circle>
-          <circle cx="398" cy="371" r="5"></circle>
-          <circle cx="552" cy="358" r="5"></circle>
-          <circle cx="653" cy="349" r="5"></circle>
-          <circle cx="771" cy="342" r="5"></circle>
-        </g>
-
-        <g transform="translate(879 78)" fill="none" stroke="#415a50" stroke-width="1.2">
-          <circle r="23" opacity="0.65"></circle>
-          <path d="M0 -31 L5 -12 L0 -16 L-5 -12 Z" fill="#cf4d2f" stroke="none"></path>
-          <path d="M0 17 L3 26 L0 23 L-3 26 Z" fill="#415a50" stroke="none"></path>
-          <text x="0" y="-38" fill="#415a50" stroke="none" text-anchor="middle" font-size="9" font-weight="700" letter-spacing="1.5">N</text>
-        </g>
-        <g transform="translate(781 638)" fill="#415a50" font-size="10" letter-spacing="1.3">
-          <text x="0" y="-14">SCHEMATIC SCALE</text>
-          <path d="M0 0 H74" stroke="#415a50" stroke-width="1.4"></path>
-          <path d="M0 -4 V4 M37 -4 V4 M74 -4 V4" stroke="#415a50" stroke-width="1.4"></path>
-          <text x="0" y="18">0</text>
-          <text x="31" y="18">1 KM</text>
-        </g>
-      </svg>
-
-      <nav class="map-places" aria-label="Landmarks in central Chongqing">
-        <a class="map-place place--ciqikou" href="/attractions/ciqikou-vs-longmenhao/" aria-label="Ciqikou old street, best in the morning">
-          <span class="map-place__pin"><span>01</span></span>
-          <span class="map-place__label"><strong>Ciqikou</strong><small>Old lanes · morning</small></span>
-        </a>
-        <a class="map-place place--liziba" href="/attractions/liziba-monorail-viewpoints/" aria-label="Liziba monorail viewpoints, early light">
-          <span class="map-place__pin"><span>02</span></span>
-          <span class="map-place__label"><strong>Liziba</strong><small>Monorail · early</small></span>
-        </a>
-        <a class="map-place place--kuixinglou" href="/attractions/kuixinglou-22-story-drop/" aria-label="Kuixinglou and the 22-story drop">
-          <span class="map-place__pin"><span>03</span></span>
-          <span class="map-place__label"><strong>Kuixinglou</strong><small>Vertical city</small></span>
-        </a>
-        <a class="map-place place--jiefangbei" href="/guides/where-to-stay-chongqing/" aria-label="Where to stay around Jiefangbei">
-          <span class="map-place__pin"><span>04</span></span>
-          <span class="map-place__label"><strong>Jiefangbei</strong><small>Stay &amp; eat</small></span>
-        </a>
-        <a class="map-place place--hongyadong" href="/attractions/hongyadong-night-crowds/" aria-label="Hongyadong at night">
-          <span class="map-place__pin"><span>05</span></span>
-          <span class="map-place__label"><strong>Hongyadong</strong><small>After dark</small></span>
-        </a>
-        <a class="map-place place--cableway" href="/attractions/yangtze-river-cableway-queue/" aria-label="Yangtze River Cableway queue strategy">
-          <span class="map-place__pin"><span>06</span></span>
-          <span class="map-place__label"><strong>Ropeway</strong><small>Cross the river</small></span>
-        </a>
-        <a class="map-place place--shibati" href="/attractions/shibati-mountain-trails/" aria-label="Shibati mountain stairs">
-          <span class="map-place__pin"><span>07</span></span>
-          <span class="map-place__label"><strong>Shibati</strong><small>Stairs &amp; lanes</small></span>
-        </a>
-        <a class="map-place place--eling" href="/attractions/eling-park-nanbin-road/" aria-label="Eling Park and Nanbin Road viewpoints">
-          <span class="map-place__pin"><span>08</span></span>
-          <span class="map-place__label"><strong>Eling Park</strong><small>City panorama</small></span>
-        </a>
-      </nav>
-
-      <div class="map-coordinate" aria-hidden="true">
-        <span>29.5630° N</span>
-        <span>106.5516° E</span>
-      </div>
+<section class="home-directory" aria-labelledby="home-directory-title">
+  <div class="home-directory__inner">
+    <div class="home-directory__intro">
+      <span class="directory-kicker">Start exploring</span>
+      <h2 id="home-directory-title">Places and guides</h2>
     </div>
 
-    <footer class="city-map__foot">
-      <div class="map-legend" aria-label="Map legend">
-        <span><i class="legend-river"></i>River</span>
-        <span><i class="legend-metro"></i>Metro</span>
-        <span><i class="legend-walk"></i>Walking loop</span>
-      </div>
-      <p>Schematic map · not for turn-by-turn navigation</p>
-    </footer>
-  </section>
-
-  <aside class="map-rail" aria-label="Choose a way into the map">
-    <div class="map-rail__intro">
-      <span class="map-rail__eyebrow">Pick your first thread</span>
-      <h2>Start where the rivers meet.</h2>
-      <p>Chongqing is easiest to decode in short, vertical loops. Follow one line now, then let the rest of the map unfold.</p>
-    </div>
-
-    <div class="map-rail__routes">
-      {routes.map((route) => (
-        <a class="map-route" href={route.href}>
-          <span class="map-route__number">{route.number}</span>
-          <span class="map-route__copy">
-            <small>{route.label}</small>
-            <strong>{route.title}</strong>
-            <span>{route.description}</span>
-          </span>
-          <span class="map-route__arrow" aria-hidden="true">↗</span>
+    <nav class="featured-links" aria-label="Featured attraction guides">
+      {featuredPlaces.map((place) => (
+        <a class="featured-link" href={place.href}>
+          <strong>{place.linkLabel}</strong>
+          <span>{place.area}</span>
         </a>
       ))}
-    </div>
+    </nav>
 
-    <a class="map-rail__all" href="/attractions/">
-      Open the full attraction index
-      <span aria-hidden="true">→</span>
-    </a>
-  </aside>
-</div>
+    <nav class="category-links" aria-label="Guide categories">
+      {placeCategories.map((category) => (
+        <a href={category.href}>{category.label}</a>
+      ))}
+    </nav>
+  </div>
+</section>
+
+<script type="application/json" id="chongqing-places" set:html={JSON.stringify(placeCollection)}></script>
+
+<script>
+  import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url';
+
+  const mapElement = document.getElementById('chongqing-map');
+  const placesElement = document.getElementById('chongqing-places');
+  const root = document.querySelector('.map-home');
+  const loader = document.querySelector('.map-loading');
+  let started = false;
+
+  async function initializeMap() {
+    if (started || !mapElement || !placesElement || !root) return;
+    started = true;
+
+    try {
+      const maplibregl = await import('maplibre-gl');
+      maplibregl.setWorkerUrl(maplibreWorkerUrl);
+
+      const placeData = JSON.parse(placesElement.textContent || '{"type":"FeatureCollection","features":[]}');
+      const provinceBounds = [[105.10, 28.12], [110.25, 32.28]];
+      const map = new maplibregl.Map({
+        container: mapElement,
+        style: 'https://tiles.openfreemap.org/styles/liberty',
+        bounds: provinceBounds,
+        fitBoundsOptions: { padding: 36 },
+        minZoom: 5.4,
+        maxZoom: 15.5,
+        attributionControl: false,
+      });
+
+      map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+      map.addControl(new maplibregl.ScaleControl({ unit: 'metric', maxWidth: 110 }), 'bottom-right');
+
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isCompact = () => window.matchMedia('(max-width: 760px)').matches;
+
+      function fitProvince(animate = true) {
+        map.fitBounds(provinceBounds, {
+          padding: isCompact()
+            ? { top: 205, right: 28, bottom: 16, left: 28 }
+            : { top: 76, right: 74, bottom: 42, left: 430 },
+          duration: animate && !reduceMotion ? 850 : 0,
+          maxZoom: 7.1,
+        });
+      }
+
+      function fitCore() {
+        map.jumpTo({
+          center: [106.56, 29.56],
+          zoom: 13.2,
+          bearing: 0,
+          pitch: 0,
+        });
+      }
+
+      map.on('error', (event) => {
+        console.warn('Map resource could not be loaded.', event.error);
+      });
+
+      map.on('load', async () => {
+        if (map.getLayer('natural_earth')) map.setLayoutProperty('natural_earth', 'visibility', 'none');
+        if (map.getLayer('background')) map.setPaintProperty('background', 'background-color', '#e7e7de');
+        if (map.getLayer('water')) map.setPaintProperty('water', 'fill-color', '#a9c9c4');
+        if (map.getLayer('park')) map.setPaintProperty('park', 'fill-color', '#cad8c8');
+
+        try {
+          const boundary = await fetch('/data/chongqing-boundary.geojson').then((response) => response.json());
+          map.addSource('chongqing-boundary', { type: 'geojson', data: boundary });
+          map.addLayer({
+            id: 'chongqing-fill',
+            type: 'fill',
+            source: 'chongqing-boundary',
+            paint: { 'fill-color': '#d6c6a6', 'fill-opacity': 0.10 },
+          });
+          map.addLayer({
+            id: 'chongqing-outline',
+            type: 'line',
+            source: 'chongqing-boundary',
+            paint: {
+              'line-color': '#17352d',
+              'line-width': ['interpolate', ['linear'], ['zoom'], 5, 1.1, 9, 2.4],
+              'line-opacity': 0.9,
+            },
+          });
+        } catch (error) {
+          console.warn('Chongqing boundary could not be loaded.', error);
+        }
+
+        map.addSource('places', {
+          type: 'geojson',
+          data: placeData,
+          cluster: true,
+          clusterMaxZoom: 10,
+          clusterRadius: 38,
+        });
+
+        map.addLayer({
+          id: 'place-clusters',
+          type: 'circle',
+          source: 'places',
+          filter: ['has', 'point_count'],
+          paint: {
+            'circle-color': '#cf4d2f',
+            'circle-radius': ['step', ['get', 'point_count'], 20, 5, 24, 10, 28],
+            'circle-stroke-color': '#fbf7ee',
+            'circle-stroke-width': 3,
+            'circle-opacity': 0.96,
+          },
+        });
+
+        map.addLayer({
+          id: 'place-cluster-count',
+          type: 'symbol',
+          source: 'places',
+          filter: ['has', 'point_count'],
+          layout: {
+            'text-field': '{point_count_abbreviated}',
+            'text-size': 13,
+            'text-font': ['Noto Sans Regular'],
+          },
+          paint: { 'text-color': '#fffaf0' },
+        });
+
+        map.addLayer({
+          id: 'place-points',
+          type: 'circle',
+          source: 'places',
+          filter: ['!', ['has', 'point_count']],
+          paint: {
+            'circle-color': ['match', ['get', 'kind'], 'city', '#cf4d2f', '#276354'],
+            'circle-radius': ['interpolate', ['linear'], ['zoom'], 6, 6.5, 10, 8.5, 14, 10],
+            'circle-stroke-color': '#fffaf0',
+            'circle-stroke-width': 2.5,
+          },
+        });
+
+        const labelStyle = {
+          'text-field': ['get', 'name'],
+          'text-font': ['Noto Sans Regular'],
+          'text-offset': [0, 1.35],
+          'text-anchor': 'top',
+          'text-allow-overlap': false,
+          'text-ignore-placement': false,
+        };
+
+        map.addLayer({
+          id: 'place-labels-region',
+          type: 'symbol',
+          source: 'places',
+          filter: ['all', ['!', ['has', 'point_count']], ['==', ['get', 'kind'], 'region']],
+          minzoom: 6.2,
+          layout: { ...labelStyle, 'text-size': 12 },
+          paint: {
+            'text-color': '#17352d',
+            'text-halo-color': 'rgba(251, 247, 238, 0.95)',
+            'text-halo-width': 1.7,
+          },
+        });
+
+        map.addLayer({
+          id: 'place-labels-city',
+          type: 'symbol',
+          source: 'places',
+          filter: ['all', ['!', ['has', 'point_count']], ['==', ['get', 'kind'], 'city']],
+          minzoom: 9.2,
+          layout: { ...labelStyle, 'text-size': 11 },
+          paint: {
+            'text-color': '#17352d',
+            'text-halo-color': 'rgba(251, 247, 238, 0.95)',
+            'text-halo-width': 1.7,
+          },
+        });
+
+        map.on('click', 'place-clusters', (event) => {
+          const feature = event.features?.[0];
+          if (!feature) return;
+          const clusterId = feature.properties?.cluster_id;
+          map.getSource('places')?.getClusterExpansionZoom(clusterId).then((zoom) => {
+            map.easeTo({
+              center: feature.geometry.coordinates,
+              zoom: zoom + 0.35,
+              duration: reduceMotion ? 0 : 700,
+            });
+          });
+        });
+
+        map.on('click', 'place-points', (event) => {
+          const feature = event.features?.[0];
+          if (!feature) return;
+          const place = feature.properties;
+          const content = document.createElement('div');
+          content.className = 'place-popup';
+
+          const area = document.createElement('span');
+          area.className = 'place-popup__area';
+          area.textContent = place.area;
+
+          const title = document.createElement('strong');
+          title.textContent = place.name;
+
+          const localName = document.createElement('span');
+          localName.className = 'place-popup__local';
+          localName.lang = 'zh-CN';
+          localName.textContent = place.zh;
+
+          const note = document.createElement('p');
+          note.textContent = place.note;
+
+          content.append(area, title, localName, note);
+
+          if (place.href) {
+            const link = document.createElement('a');
+            link.href = place.href;
+            link.textContent = 'Open the field guide';
+            content.append(link);
+          }
+
+          new maplibregl.Popup({ offset: 13, maxWidth: '290px' })
+            .setLngLat(feature.geometry.coordinates)
+            .setDOMContent(content)
+            .addTo(map);
+        });
+
+        ['place-clusters', 'place-points'].forEach((layer) => {
+          map.on('mouseenter', layer, () => { map.getCanvas().style.cursor = 'pointer'; });
+          map.on('mouseleave', layer, () => { map.getCanvas().style.cursor = ''; });
+        });
+
+        document.querySelectorAll('[data-map-view]').forEach((button) => {
+          button.addEventListener('click', () => {
+            document.querySelectorAll('[data-map-view]').forEach((item) => item.classList.remove('is-active'));
+            button.classList.add('is-active');
+            if (button.dataset.mapView === 'core') fitCore();
+            else fitProvince();
+          });
+        });
+
+        fitProvince(false);
+        document.querySelectorAll('[data-map-view]').forEach((button) => { button.disabled = false; });
+        root.classList.add('is-ready');
+      });
+    } catch (error) {
+      console.error('The map could not be initialized.', error);
+      if (loader) {
+        loader.classList.add('has-error');
+        loader.textContent = 'Map unavailable · use the guide links below';
+      }
+    }
+  }
+
+  function scheduleMap() {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(() => { void initializeMap(); }, { timeout: 1200 });
+    } else {
+      window.setTimeout(() => { void initializeMap(); }, 200);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', scheduleMap, { once: true });
+  } else {
+    scheduleMap();
+  }
+</script>
 
 <style>
-  .atlas-board {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 336px;
-    gap: 18px;
-    align-items: stretch;
-  }
-
-  .city-map {
-    overflow: hidden;
-    min-width: 0;
-    border: 1px solid rgba(251, 247, 238, 0.26);
-    border-radius: 24px;
-    background: #ede4d4;
-    color: var(--ink);
-    box-shadow: 0 34px 80px rgba(5, 13, 10, 0.26);
-  }
-
-  .city-map__top,
-  .city-map__foot {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 18px;
-    padding: 18px 22px;
-    background: rgba(251, 247, 238, 0.88);
-  }
-
-  .city-map__top {
-    border-bottom: 1px solid rgba(21, 35, 29, 0.13);
-  }
-
-  .map-overline {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--muted);
-    font-size: 0.64rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-  }
-
-  .map-overline i {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--terra);
-    box-shadow: 0 0 0 4px rgba(207, 77, 47, 0.13);
-  }
-
-  .city-map__top h2 {
-    margin-top: 3px;
-    font-family: var(--serif);
-    font-size: clamp(1.65rem, 3vw, 2.25rem);
-    font-weight: 400;
-    letter-spacing: -0.035em;
-    line-height: 1;
-  }
-
-  .map-view {
-    color: var(--muted);
-    font-size: 0.66rem;
-    font-weight: 700;
-    letter-spacing: 0.09em;
-    text-align: right;
-    text-transform: uppercase;
-  }
-
-  .map-stage {
+  .map-home {
     position: relative;
-    aspect-ratio: 1.35 / 1;
+    height: clamp(520px, calc(100svh - 210px), 780px);
+    overflow: hidden;
     isolation: isolate;
-    overflow: hidden;
-    background: #eee5d5;
+    background:
+      radial-gradient(ellipse at 25% 30%, rgba(255, 250, 240, 0.85), transparent 38%),
+      repeating-radial-gradient(ellipse at 72% 42%, transparent 0 34px, rgba(39, 99, 84, 0.11) 35px 36px, transparent 37px 68px),
+      #dfe5df;
   }
 
-  .map-art {
+  .map-canvas {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
+    background:
+      linear-gradient(rgba(23, 53, 45, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(23, 53, 45, 0.035) 1px, transparent 1px);
+    background-size: 40px 40px;
   }
 
-  .city-map__top h2,
-  .map-view,
-  .map-legend,
-  .city-map__foot p {
-    position: relative;
-    z-index: 2;
-  }
-
-  .map-places {
+  .map-panel {
     position: absolute;
-    inset: 0;
-    z-index: 3;
+    z-index: 5;
+    top: 24px;
+    left: clamp(18px, 3vw, 46px);
+    width: min(365px, calc(100% - 36px));
+    padding: 24px;
+    border: 1px solid rgba(21, 35, 29, 0.17);
+    border-radius: 20px;
+    background: rgba(251, 247, 238, 0.94);
+    box-shadow: 0 24px 65px rgba(21, 35, 29, 0.19);
+    backdrop-filter: blur(14px);
   }
 
-  .map-place {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    color: var(--ink);
-    text-decoration: none;
-    transform: translate(-50%, -50%);
-  }
-
-  .map-place__pin {
-    display: grid;
-    place-items: center;
-    width: 28px;
-    height: 28px;
-    flex: 0 0 28px;
-    border: 2px solid #fbf7ee;
-    border-radius: 50% 50% 50% 0;
-    background: var(--terra);
-    box-shadow: 0 4px 14px rgba(21, 35, 29, 0.25);
-    color: var(--white);
-    font-size: 0.56rem;
-    font-weight: 700;
-    letter-spacing: 0.03em;
-    transform: rotate(-45deg);
-    transition: transform 180ms ease, background 180ms ease, box-shadow 180ms ease;
-  }
-
-  .map-place__pin span {
-    transform: rotate(45deg);
-  }
-
-  .map-place__label {
-    display: grid;
-    min-width: max-content;
-    padding: 6px 9px 7px;
-    border: 1px solid rgba(21, 35, 29, 0.15);
-    border-radius: 8px;
-    background: rgba(251, 247, 238, 0.93);
-    box-shadow: 0 7px 20px rgba(21, 35, 29, 0.09);
-    line-height: 1.1;
-    transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
-  }
-
-  .map-place__label strong {
-    font-size: 0.69rem;
-    letter-spacing: 0.01em;
-  }
-
-  .map-place__label small {
-    margin-top: 2px;
-    color: var(--muted);
-    font-size: 0.5rem;
-    font-weight: 700;
-    letter-spacing: 0.055em;
-    text-transform: uppercase;
-  }
-
-  .map-place:hover .map-place__pin,
-  .map-place:focus-visible .map-place__pin {
-    background: var(--ink);
-    box-shadow: 0 6px 18px rgba(21, 35, 29, 0.34);
-    transform: rotate(-45deg) scale(1.12);
-  }
-
-  .map-place:hover .map-place__label,
-  .map-place:focus-visible .map-place__label {
-    border-color: var(--gold);
-    background: var(--cream);
-    transform: translateY(-2px);
-  }
-
-  .place--ciqikou { left: 25%; top: 42%; }
-  .place--liziba { left: 41.5%; top: 53.7%; }
-  .place--kuixinglou { left: 56%; top: 48.5%; }
-  .place--jiefangbei { left: 66.7%; top: 53.2%; }
-  .place--jiefangbei .map-place__label { margin-left: 2px; }
-  .place--hongyadong { left: 71.2%; top: 62%; }
-  .place--cableway { left: 82.2%; top: 60.5%; }
-  .place--shibati { left: 64.3%; top: 67.5%; }
-  .place--eling { left: 49.7%; top: 76.1%; }
-
-  .place--hongyadong,
-  .place--cableway,
-  .place--eling {
-    flex-direction: row-reverse;
-  }
-
-  .place--hongyadong .map-place__label,
-  .place--cableway .map-place__label,
-  .place--eling .map-place__label {
-    text-align: right;
-  }
-
-  .map-coordinate {
-    position: absolute;
-    top: 19px;
-    left: 20px;
-    display: grid;
-    gap: 1px;
-    color: rgba(21, 35, 29, 0.46);
-    font-size: 0.51rem;
-    font-weight: 700;
-    letter-spacing: 0.11em;
-    line-height: 1.35;
-    text-transform: uppercase;
-  }
-
-  .city-map__foot {
-    padding-block: 13px;
-    border-top: 1px solid rgba(21, 35, 29, 0.13);
-  }
-
-  .map-legend {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 14px;
-    color: var(--muted);
-    font-size: 0.61rem;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
-
-  .map-legend span {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .map-legend i {
-    display: inline-block;
-    width: 18px;
-    height: 3px;
-    background: var(--terra);
-  }
-
-  .map-legend .legend-river {
-    height: 5px;
-    border-radius: 999px;
-    background: #8bb3ae;
-  }
-
-  .map-legend .legend-metro {
-    height: 2px;
-    background: repeating-linear-gradient(90deg, var(--terra) 0 4px, transparent 4px 7px);
-  }
-
-  .map-legend .legend-walk {
-    height: 2px;
-    background: repeating-linear-gradient(90deg, #8d4f39 0 3px, transparent 3px 6px);
-  }
-
-  .city-map__foot p {
-    color: var(--muted);
-    font-size: 0.58rem;
-    letter-spacing: 0.055em;
-    text-transform: uppercase;
-  }
-
-  .map-rail {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 28px 24px 24px;
-    border: 1px solid rgba(251, 247, 238, 0.18);
-    border-radius: 24px;
-    background: rgba(251, 247, 238, 0.055);
-  }
-
-  .map-rail__eyebrow {
-    color: var(--gold);
-    font-size: 0.65rem;
+  .map-kicker,
+  .directory-kicker {
+    color: var(--terra);
+    font-size: 0.64rem;
     font-weight: 700;
     letter-spacing: 0.13em;
     text-transform: uppercase;
   }
 
-  .map-rail__intro h2 {
-    max-width: 260px;
-    margin-top: 10px;
+  .map-panel h1 {
+    max-width: 340px;
+    margin-top: 12px;
     font-family: var(--serif);
-    font-size: 2.15rem;
+    font-size: clamp(2.55rem, 4.8vw, 4rem);
     font-weight: 400;
-    letter-spacing: -0.035em;
-    line-height: 1;
+    letter-spacing: -0.045em;
+    line-height: 0.9;
   }
 
-  .map-rail__intro p {
-    margin-top: 14px;
-    color: rgba(251, 247, 238, 0.64);
-    font-size: 0.82rem;
+  .map-panel p {
+    max-width: 300px;
+    margin-top: 15px;
+    color: var(--muted);
+    font-size: 0.8rem;
     line-height: 1.55;
   }
 
-  .map-rail__routes {
-    display: grid;
-    border-top: 1px solid rgba(251, 247, 238, 0.17);
+  .map-actions { display: flex; gap: 7px; margin-top: 18px; }
+  .map-actions button {
+    padding: 8px 12px;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink-soft);
+    font: inherit;
+    font-size: 0.68rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .map-actions button:hover,
+  .map-actions button.is-active { border-color: var(--ink); background: var(--ink); color: var(--cream); }
+  .map-actions button:disabled { cursor: wait; opacity: 0.58; }
+
+  .map-key {
+    position: absolute;
+    z-index: 4;
+    bottom: 14px;
+    left: clamp(18px, 3vw, 46px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px 15px;
+    max-width: calc(100% - 130px);
+    padding: 9px 12px;
+    border: 1px solid rgba(21, 35, 29, 0.14);
+    border-radius: 10px;
+    background: rgba(251, 247, 238, 0.91);
+    color: var(--muted);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .map-key span { display: inline-flex; align-items: center; gap: 6px; }
+  .map-key i { width: 9px; height: 9px; border-radius: 50%; }
+  .map-key .is-city { background: var(--terra); }
+  .map-key .is-region { background: var(--jade); }
+  .map-key small { flex-basis: 100%; color: #64746d; font-size: 0.52rem; font-weight: 500; letter-spacing: 0.015em; }
+
+  .map-loading {
+    position: absolute;
+    z-index: 5;
+    top: 80px;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 7px 10px;
+    border: 1px solid rgba(21, 35, 29, 0.14);
+    border-radius: 999px;
+    background: rgba(251, 247, 238, 0.92);
+    color: var(--muted);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: opacity 240ms ease, visibility 240ms ease;
+  }
+  .map-loading span {
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid rgba(21, 35, 29, 0.2);
+    border-top-color: var(--terra);
+    border-radius: 50%;
+    animation: map-spin 800ms linear infinite;
+  }
+  .map-loading.has-error { max-width: 240px; line-height: 1.35; text-transform: none; }
+  .map-loading.has-error span { display: none; }
+  .map-home.is-ready .map-loading { opacity: 0; visibility: hidden; }
+
+  .map-noscript {
+    position: absolute;
+    z-index: 6;
+    right: 16px;
+    bottom: 16px;
+    max-width: 300px;
+    padding: 12px;
+    border-radius: 10px;
+    background: var(--cream);
+    color: var(--muted);
+    font-size: 0.75rem;
   }
 
-  .map-route {
+  .map-home :global(.maplibregl-ctrl-group) { overflow: hidden; border-radius: 12px; box-shadow: 0 8px 24px rgba(21, 35, 29, 0.15); }
+  .map-home :global(.maplibregl-ctrl-group button) { background: rgba(251, 247, 238, 0.95); }
+  .map-home :global(.maplibregl-ctrl-scale) { border-color: rgba(21, 35, 29, 0.55); background: rgba(251, 247, 238, 0.8); color: var(--ink); }
+  .map-home :global(.maplibregl-popup-content) { padding: 18px 19px; border-radius: 14px; box-shadow: 0 18px 50px rgba(21, 35, 29, 0.25); }
+  .map-home :global(.place-popup) { display: grid; gap: 5px; }
+  .map-home :global(.place-popup__area),
+  .map-home :global(.place-popup__local) { color: var(--muted); font-size: 0.62rem; }
+  .map-home :global(.place-popup__area) { color: var(--terra); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .map-home :global(.place-popup strong) { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; line-height: 1.05; }
+  .map-home :global(.place-popup p) { margin: 3px 0 5px; color: var(--muted); font-size: 0.73rem; line-height: 1.45; }
+  .map-home :global(.place-popup a) { color: var(--terra); font-size: 0.7rem; font-weight: 700; text-decoration: none; }
+
+  .home-directory {
+    border-top: 1px solid var(--line-strong);
+    background: var(--paper);
+  }
+
+  .home-directory__inner {
+    width: min(calc(100% - 36px), var(--wrap));
+    margin-inline: auto;
     display: grid;
-    grid-template-columns: 26px minmax(0, 1fr) 18px;
-    gap: 10px;
-    align-items: start;
-    padding: 15px 0;
-    border-bottom: 1px solid rgba(251, 247, 238, 0.17);
-    color: var(--cream);
+    grid-template-columns: 170px minmax(0, 1fr) 145px;
+    gap: 28px;
+    padding-block: 20px 22px;
+  }
+
+  .home-directory__intro h2 {
+    margin-top: 7px;
+    font-family: var(--serif);
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  .featured-links {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0 18px;
+    border-top: 1px solid var(--line);
+  }
+
+  .featured-link {
+    display: grid;
+    align-content: start;
+    min-width: 0;
+    padding: 11px 0 10px;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink);
     text-decoration: none;
   }
 
-  .map-route__number {
-    padding-top: 1px;
-    color: var(--gold);
-    font-family: var(--serif);
-    font-size: 0.92rem;
-  }
-
-  .map-route__copy {
-    display: grid;
-  }
-
-  .map-route__copy small {
-    color: rgba(251, 247, 238, 0.43);
-    font-size: 0.55rem;
-    font-weight: 700;
-    letter-spacing: 0.105em;
-    text-transform: uppercase;
-  }
-
-  .map-route__copy strong {
-    margin-top: 3px;
-    font-family: var(--serif);
-    font-size: 1.18rem;
-    font-weight: 400;
-    line-height: 1.08;
-  }
-
-  .map-route__copy > span {
-    margin-top: 5px;
-    color: rgba(251, 247, 238, 0.56);
-    font-size: 0.7rem;
-    line-height: 1.45;
-  }
-
-  .map-route__arrow {
-    color: var(--gold);
-    transition: transform 180ms ease;
-  }
-
-  .map-route:hover .map-route__arrow {
-    transform: translate(2px, -2px);
-  }
-
-  .map-route:hover .map-route__copy strong {
-    color: var(--gold);
-  }
-
-  .map-rail__all {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-top: auto;
-    padding: 12px 14px;
-    border: 1px solid rgba(251, 247, 238, 0.23);
-    border-radius: 999px;
-    color: var(--cream);
+  .featured-link strong {
     font-size: 0.72rem;
     font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .featured-link span {
+    margin-top: 4px;
+    overflow: hidden;
+    color: var(--muted);
+    font-size: 0.56rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .featured-link:hover strong { color: var(--terra); }
+
+  .category-links {
+    display: grid;
+    align-content: start;
+    gap: 7px;
+    padding-top: 10px;
+  }
+
+  .category-links a {
+    color: var(--muted);
+    font-size: 0.68rem;
+    font-weight: 650;
     text-decoration: none;
   }
 
-  .map-rail__all:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
+  .category-links a:hover { color: var(--terra); }
+
+  @keyframes map-spin { to { transform: rotate(360deg); } }
 
   @media (max-width: 1060px) {
-    .atlas-board { grid-template-columns: 1fr; }
-    .map-rail {
-      display: grid;
-      grid-template-columns: 0.85fr 1.4fr;
-      align-items: start;
-    }
-    .map-rail__routes { border-top: 0; }
-    .map-rail__all { grid-column: 1 / -1; width: fit-content; margin-left: auto; }
+    .home-directory__inner { grid-template-columns: 150px minmax(0, 1fr); gap: 20px; }
+    .featured-links { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .category-links { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 8px 18px; padding-top: 0; border-top: 1px solid var(--line); }
   }
 
   @media (max-width: 760px) {
-    .map-stage { aspect-ratio: auto; min-height: 520px; }
-    .map-view { display: none; }
-    .map-place__label { padding: 5px 7px 6px; }
-    .map-place__label small { display: none; }
-    .map-place__label strong { font-size: 0.6rem; }
-    .map-place__pin { width: 25px; height: 25px; flex-basis: 25px; }
-    .place--ciqikou { left: 24%; top: 36%; }
-    .place--liziba { left: 39%; top: 48%; }
-    .place--kuixinglou { left: 51%; top: 43%; }
-    .place--jiefangbei { left: 69%; top: 50%; }
-    .place--hongyadong { left: 68%; top: 60%; }
-    .place--cableway { left: 79%; top: 63%; }
-    .place--shibati { left: 60%; top: 68%; }
-    .place--eling { left: 41%; top: 76%; }
-    .map-rail { grid-template-columns: 1fr; padding: 24px 20px 20px; }
-    .map-rail__intro h2 { max-width: 100%; }
-    .map-rail__all { grid-column: auto; margin-left: 0; width: 100%; }
-    .city-map__foot { align-items: flex-start; }
-    .city-map__foot p { max-width: 150px; text-align: right; }
+    .map-home { height: clamp(500px, calc(100svh - 190px), 720px); }
+    .map-panel { top: 14px; left: 14px; width: calc(100% - 28px); padding: 18px 20px; border-radius: 16px; }
+    .map-panel h1 { max-width: 330px; font-size: clamp(2.25rem, 10.5vw, 3.1rem); }
+    .map-panel p { margin-top: 11px; font-size: 0.72rem; }
+    .map-actions { margin-top: 13px; }
+    .map-key { bottom: 12px; left: 14px; max-width: calc(100% - 92px); }
+    .map-key small { display: none; }
+    .map-loading { top: 165px; }
+    .home-directory__inner { width: calc(100% - 28px); grid-template-columns: 1fr; gap: 12px; padding-block: 16px 18px; }
+    .home-directory__intro { display: flex; align-items: end; justify-content: space-between; gap: 12px; }
+    .home-directory__intro h2 { margin-top: 0; font-size: 1.55rem; }
+    .featured-links { grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 0; }
+    .featured-link { padding-block: 9px 8px; border-top: 1px solid var(--line); }
+    .category-links { padding-top: 4px; border-top: 0; gap: 7px 14px; }
   }
 
-  @media (max-width: 520px) {
-    .city-map__top, .city-map__foot { padding-inline: 16px; }
-    .map-stage { min-height: 465px; }
-    .map-coordinate { top: 14px; left: 14px; }
-    .map-place__label {
-      display: inline-grid;
-      padding: 4px 5px 5px;
-      border-radius: 6px;
-      box-shadow: 0 4px 12px rgba(21, 35, 29, 0.1);
-    }
-    .map-place__label strong { font-size: 0.49rem; }
-    .place--kuixinglou { flex-direction: row-reverse; }
-    .place--kuixinglou .map-place__label { text-align: right; }
-    .place--jiefangbei,
-    .place--cableway { flex-direction: row; }
-    .place--jiefangbei .map-place__label,
-    .place--cableway .map-place__label { text-align: left; }
-    .place--shibati { flex-direction: row-reverse; }
-    .place--shibati .map-place__label { text-align: right; }
-    .place--eling { flex-direction: row; }
-    .place--eling .map-place__label { text-align: left; }
-    .place--ciqikou { left: 19%; top: 37%; }
-    .place--liziba { left: 36%; top: 50%; }
-    .place--hongyadong { left: 74%; top: 58%; }
-    .place--shibati { left: 58%; top: 69%; }
-    .place--jiefangbei { left: 70%; top: 46%; }
-    .map-legend { gap: 9px; }
-    .map-legend i { width: 12px; }
-    .city-map__foot { display: block; }
-    .city-map__foot p { max-width: none; margin-top: 8px; text-align: left; }
+  @media (max-width: 480px) {
+    .map-panel p { display: none; }
+    .map-panel { padding-block: 15px; }
+    .map-loading { top: 137px; }
+    .map-actions button { padding: 7px 10px; }
+    .featured-link span { display: none; }
   }
 </style>

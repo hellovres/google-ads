@@ -10,6 +10,7 @@ interface Props {
   publishedTime?: Date;
   modifiedTime?: Date;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  preconnectMap?: boolean;
 }
 
 const {
@@ -21,6 +22,7 @@ const {
   publishedTime,
   modifiedTime,
   jsonLd,
+  preconnectMap = false,
 } = Astro.props;
 
 const pageTitle = title === site.name ? title : `${title} | ${site.name}`;
@@ -38,6 +40,7 @@ const adsenseClient = import.meta.env.PUBLIC_ADSENSE_CLIENT;
 <title>{pageTitle}</title>
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
+{preconnectMap && <link rel="preconnect" href="https://tiles.openfreemap.org" crossorigin />}
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="alternate" type="application/rss+xml" title={site.name} href="/rss.xml" />
 {noindex && <meta name="robots" content="noindex, nofollow" />}

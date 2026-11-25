@@ -18,9 +18,11 @@ interface Props {
   publishedTime?: Date;
   modifiedTime?: Date;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
+  showFooter?: boolean;
+  preconnectMap?: boolean;
 }
 
-const props = Astro.props;
+const { showFooter = true, ...props } = Astro.props;
 ---
 
 <!doctype html>
@@ -34,6 +36,6 @@ const props = Astro.props;
     <main id="main-content">
       <slot />
     </main>
-    <Footer />
+    {showFooter && <Footer />}
   </body>
 </html>
