@@ -8,14 +8,22 @@ const placeCount = places.length;
 <section class="map-home" aria-labelledby="map-home-title">
   <div id="chongqing-map" class="map-canvas" role="region" aria-label="Interactive map of attractions across Chongqing"></div>
 
-  <div class="map-panel">
-    <span class="map-kicker">Chongqing Field Guide · {placeCount} places</span>
-    <h1 id="map-home-title">Read all of Chongqing.</h1>
-    <p>City landmarks and mountain-country destinations on one map. Zoom into the urban core to separate the central attractions.</p>
-    <div class="map-actions" aria-label="Map views">
-      <button class="is-active" type="button" data-map-view="province" disabled>Whole city</button>
-      <button type="button" data-map-view="core" disabled>City core</button>
-    </div>
+  <h1 id="map-home-title" class="sr-only">Read all of Chongqing.</h1>
+
+  <div class="map-views" role="group" aria-label="Map views">
+    <button class="is-active" type="button" data-map-view="province" aria-label="Whole city" aria-pressed="true" title="Whole city" disabled>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4.25 6.6 9.45 4.5l5.1 2.1 5.2-2v13.1l-5.2 2-5.1-2.1-5.2 2.1V6.6Z"/>
+        <path d="M9.45 4.5v13.1M14.55 6.6v13.1"/>
+      </svg>
+    </button>
+    <button type="button" data-map-view="core" aria-label="City core" aria-pressed="false" title="City core" disabled>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="6.2"/>
+        <circle cx="12" cy="12" r="2.15"/>
+        <path d="M12 2.2v3.1M12 18.7v3.1M2.2 12h3.1M18.7 12h3.1"/>
+      </svg>
+    </button>
   </div>
 
   <div class="map-key" aria-label="Map legend">
@@ -95,8 +103,8 @@ const placeCount = places.length;
       function fitProvince(animate = true) {
         map.fitBounds(provinceBounds, {
           padding: isCompact()
-            ? { top: 205, right: 28, bottom: 16, left: 28 }
-            : { top: 76, right: 74, bottom: 42, left: 430 },
+            ? { top: 70, right: 20, bottom: 16, left: 20 }
+            : { top: 68, right: 74, bottom: 42, left: 78 },
           duration: animate && !reduceMotion ? 850 : 0,
           maxZoom: 7.1,
         });
@@ -286,8 +294,12 @@ const placeCount = places.length;
 
         document.querySelectorAll('[data-map-view]').forEach((button) => {
           button.addEventListener('click', () => {
-            document.querySelectorAll('[data-map-view]').forEach((item) => item.classList.remove('is-active'));
+            document.querySelectorAll('[data-map-view]').forEach((item) => {
+              item.classList.remove('is-active');
+              item.setAttribute('aria-pressed', 'false');
+            });
             button.classList.add('is-active');
+            button.setAttribute('aria-pressed', 'true');
             if (button.dataset.mapView === 'core') fitCore();
             else fitProvince();
           });
@@ -342,21 +354,63 @@ const placeCount = places.length;
     background-size: 40px 40px;
   }
 
-  .map-panel {
+  .map-views {
     position: absolute;
     z-index: 5;
-    top: 24px;
+    top: 20px;
     left: clamp(18px, 3vw, 46px);
-    width: min(365px, calc(100% - 36px));
-    padding: 24px;
+    display: inline-flex;
+    gap: 3px;
+    padding: 4px;
     border: 1px solid rgba(21, 35, 29, 0.17);
-    border-radius: 20px;
+    border-radius: 13px;
     background: rgba(251, 247, 238, 0.94);
-    box-shadow: 0 24px 65px rgba(21, 35, 29, 0.19);
+    box-shadow: 0 12px 34px rgba(21, 35, 29, 0.17);
     backdrop-filter: blur(14px);
   }
 
-  .map-kicker,
+  .map-views button {
+    display: grid;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    place-items: center;
+    border: 0;
+    border-radius: 9px;
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+  }
+
+  .map-views button:hover {
+    background: rgba(23, 53, 45, 0.09);
+    color: var(--ink);
+  }
+
+  .map-views button:focus-visible {
+    outline: 2px solid var(--terra);
+    outline-offset: 2px;
+  }
+
+  .map-views button.is-active {
+    background: var(--ink);
+    color: var(--cream);
+  }
+
+  .map-views button:active { transform: scale(0.94); }
+  .map-views button:disabled { cursor: wait; opacity: 0.58; }
+
+  .map-views svg {
+    width: 19px;
+    height: 19px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.7;
+  }
+
   .directory-kicker {
     color: var(--terra);
     font-size: 0.64rem;
@@ -364,40 +418,6 @@ const placeCount = places.length;
     letter-spacing: 0.13em;
     text-transform: uppercase;
   }
-
-  .map-panel h1 {
-    max-width: 340px;
-    margin-top: 12px;
-    font-family: var(--serif);
-    font-size: clamp(2.55rem, 4.8vw, 4rem);
-    font-weight: 400;
-    letter-spacing: -0.045em;
-    line-height: 0.9;
-  }
-
-  .map-panel p {
-    max-width: 300px;
-    margin-top: 15px;
-    color: var(--muted);
-    font-size: 0.8rem;
-    line-height: 1.55;
-  }
-
-  .map-actions { display: flex; gap: 7px; margin-top: 18px; }
-  .map-actions button {
-    padding: 8px 12px;
-    border: 1px solid var(--line-strong);
-    border-radius: 999px;
-    background: transparent;
-    color: var(--ink-soft);
-    font: inherit;
-    font-size: 0.68rem;
-    font-weight: 700;
-    cursor: pointer;
-  }
-  .map-actions button:hover,
-  .map-actions button.is-active { border-color: var(--ink); background: var(--ink); color: var(--cream); }
-  .map-actions button:disabled { cursor: wait; opacity: 0.58; }
 
   .map-key {
     position: absolute;
@@ -566,13 +586,11 @@ const placeCount = places.length;
 
   @media (max-width: 760px) {
     .map-home { height: clamp(500px, calc(100svh - 190px), 720px); }
-    .map-panel { top: 14px; left: 14px; width: calc(100% - 28px); padding: 18px 20px; border-radius: 16px; }
-    .map-panel h1 { max-width: 330px; font-size: clamp(2.25rem, 10.5vw, 3.1rem); }
-    .map-panel p { margin-top: 11px; font-size: 0.72rem; }
-    .map-actions { margin-top: 13px; }
+    .map-views { top: 14px; left: 14px; }
+    .map-views button { width: 34px; height: 34px; }
     .map-key { bottom: 12px; left: 14px; max-width: calc(100% - 92px); }
     .map-key small { display: none; }
-    .map-loading { top: 165px; }
+    .map-loading { top: 76px; }
     .home-directory__inner { width: calc(100% - 28px); grid-template-columns: 1fr; gap: 12px; padding-block: 16px 18px; }
     .home-directory__intro { display: flex; align-items: end; justify-content: space-between; gap: 12px; }
     .home-directory__intro h2 { margin-top: 0; font-size: 1.55rem; }
@@ -582,10 +600,6 @@ const placeCount = places.length;
   }
 
   @media (max-width: 480px) {
-    .map-panel p { display: none; }
-    .map-panel { padding-block: 15px; }
-    .map-loading { top: 137px; }
-    .map-actions button { padding: 7px 10px; }
     .featured-link span { display: none; }
   }
 </style>
